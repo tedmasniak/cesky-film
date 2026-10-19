@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#121212" />
+    <meta name="theme-color" content="#aa8e59" />
     <script>if (!/\/$/.test(location.pathname) && !/\.html?$/.test(location.pathname)) location.replace(location.pathname + '/' + location.search + location.hash);</script>
     <meta
       name="description"
-      content="Český Film - czeska restauracja i pub w historycznym sercu Łodzi."
+      content="„Český Film” - czeska restauracja i pub w historycznym sercu Łodzi."
     />
-    <title>Český Film | Restauracja i Pub w Łodzi</title>
+    <title>„Český Film” | Restaurant & Pub w Łodzi</title>
     <link rel="icon" type="image/jpeg" href="./favicon.jpg" />
 
     
@@ -84,6 +84,7 @@
         box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
         backdrop-filter: blur(16px);
       }
+
 
       .film-strip-bottom::after,
       .film-strip-frame::before,
@@ -276,6 +277,97 @@
         }
       }
 
+      /* Złote tło strony (kolor dawnego przerywnika) i ciemny tekst */
+      body {
+        background: #aa8e59;
+        color: #121212;
+      }
+
+      html * {
+        border-color: rgba(18, 18, 18, 0.35);
+      }
+
+      main .text-\[\#A0A0A0\] {
+        color: #2e261b;
+      }
+
+      main [class*="border-[#B8975E]"] {
+        border-color: rgba(18, 18, 18, 0.3);
+      }
+
+      main .border-gray-600 {
+        border-color: rgba(18, 18, 18, 0.45);
+      }
+
+      main strong {
+        font-weight: 700;
+        color: #121212;
+      }
+
+      .nav-scrolled {
+        background: rgba(170, 142, 89, 0.94);
+        border-bottom-color: rgba(18, 18, 18, 0.25);
+      }
+
+
+      .bg-copper {
+        background-color: #121212;
+      }
+
+      .dish-photo-button {
+        border-color: rgba(18, 18, 18, 0.5);
+        background: rgba(18, 18, 18, 0.08);
+        color: #121212;
+      }
+
+      .dish-photo-button:hover,
+      .dish-photo-button:focus-visible {
+        border-color: #121212;
+        background: rgba(18, 18, 18, 0.16);
+        color: #121212;
+        outline-color: rgba(18, 18, 18, 0.6);
+      }
+
+      .lang-btn {
+        padding: 0.35rem 0.5rem;
+        border-bottom: 2px solid transparent;
+        color: #2e261b;
+        letter-spacing: inherit;
+      }
+
+      .lang-btn[aria-pressed="true"] {
+        border-bottom-color: #121212;
+        color: #121212;
+      }
+
+      /* Przerywnik sekcji: stara klisza filmowa z perforacją */
+      .film-divider {
+        position: relative;
+        height: 46px;
+        background:
+          linear-gradient(90deg, transparent 0 17%, rgba(255, 240, 210, 0.07) 17% 17.15%, transparent 17.15% 61%, rgba(255, 240, 210, 0.05) 61% 61.1%, transparent 61.1%),
+          repeating-linear-gradient(90deg, transparent 0 170px, rgba(170, 142, 89, 0.22) 170px 172px) center / 100% 20px no-repeat,
+          linear-gradient(180deg, #1d1813 0%, #120f0c 50%, #1d1813 100%);
+      }
+
+      .film-divider::before,
+      .film-divider::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='8'%3E%3Crect x='5' width='12' height='8' rx='2' fill='%23aa8e59'/%3E%3C/svg%3E") repeat-x;
+      }
+
+      .film-divider::before {
+        top: 6px;
+      }
+
+      .film-divider::after {
+        bottom: 6px;
+      }
+
       /* Telefon i tablet: nawigacja mobilna */
       .m-only,
       .nav-book,
@@ -297,7 +389,7 @@
         }
 
         #mobileMenu {
-          background: rgba(18, 18, 18, 0.97);
+          background: rgba(170, 142, 89, 0.98);
         }
 
         /* Pasek pod paskiem statusu telefonu: nad navbarem nie prześwituje treść */
@@ -309,7 +401,7 @@
           z-index: 55;
           display: block;
           height: env(safe-area-inset-top);
-          background: #121212;
+          background: #aa8e59;
         }
 
         #navbar {
@@ -343,14 +435,6 @@
           padding-right: 1rem;
         }
 
-        #navbar nav > a:first-child > span:first-child {
-          font-size: 1.45rem;
-        }
-
-        #navbar nav > a:first-child > span:last-child {
-          font-size: 6px;
-        }
-
         #hero {
           min-height: auto;
           padding-top: 7.5rem !important;
@@ -358,7 +442,7 @@
         }
 
         #hero h1 {
-          font-size: 2.6rem;
+          font-size: 2.1rem;
           line-height: 1.1;
         }
 
@@ -376,7 +460,6 @@
           margin-top: 2rem;
         }
 
-        #kuchnia .mt-12,
         #o-nas .mt-12 {
           margin-top: 2rem;
         }
@@ -425,22 +508,16 @@
           max-width: none !important;
         }
 
-        #menu-sezonowe > div {
-          padding: 2rem 1.1rem;
-        }
-
-        #menu-sezonowe .mt-12 {
-          margin-top: 2rem;
-        }
-
-        #menu-glowne [role="tablist"] {
+        #menu-glowne [role="tablist"],
+        #napoje [role="tablist"] {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 0;
           overflow: visible;
         }
 
-        #menu-glowne .menu-tab {
+        #menu-glowne .menu-tab,
+        #napoje .menu-tab {
           padding: 0.85rem 0.25rem;
           font-size: 0.7rem;
           letter-spacing: 0.12em;
@@ -473,7 +550,8 @@
         }
 
         #napoje h2,
-        #rezerwacje h2 {
+        #rezerwacje h2,
+        #voucher h2 {
           font-size: 2rem;
         }
 
@@ -512,26 +590,23 @@
       class="fixed left-0 top-0 z-50 w-full border-b border-transparent transition-all duration-500"
     >
       <nav
-        class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8"
+        class="mx-auto flex max-w-7xl items-center justify-between px-5 py-2 md:px-8"
         aria-label="Główna nawigacja"
       >
         <a
           href="#hero"
           class="flex shrink-0 flex-col items-center leading-none text-pearl transition-colors duration-300 hover:text-brass"
-          aria-label="Český Film — strona główna"
+          aria-label="„Český Film” — strona główna"
         >
-          <span class="whitespace-nowrap font-brand text-[1.8rem] font-semibold uppercase leading-none tracking-[0.09em] md:text-[2.15rem]">
-            Český Film
-          </span>
-          <span class="mt-1.5 whitespace-nowrap text-[7px] font-semibold uppercase leading-none tracking-[0.38em] text-current/70 md:text-[8px]">
-            Restaurant & Pub
-          </span>
+          <img src="./assets/img/cesky-film-logo.png" alt="" class="h-14 w-auto md:h-20" width="886" height="741" decoding="async" />
         </a>
 
         <div class="hidden items-center gap-8 text-sm font-semibold uppercase tracking-[0.22em] lg:flex">
-          <a class="transition-colors duration-300 hover:text-copper" href="#menu-glowne">Menu</a>
           <a class="transition-colors duration-300 hover:text-copper" href="#o-nas">O nas</a>
+          <a class="transition-colors duration-300 hover:text-copper" href="#menu-glowne">Menu</a>
+          <a class="transition-colors duration-300 hover:text-copper" href="#napoje">Napoje</a>
           <a class="transition-colors duration-300 hover:text-copper" href="#rezerwacje">Rezerwacje</a>
+          <a class="transition-colors duration-300 hover:text-copper" href="#voucher">Voucher</a>
           <a class="transition-colors duration-300 hover:text-copper" href="#kontakt">Kontakt</a>
         </div>
 
@@ -575,9 +650,11 @@
         class="hidden border-t border-brass/10 bg-matte/95 px-5 pb-6 pt-2 backdrop-blur-xl lg:hidden"
       >
         <div class="flex flex-col gap-1 text-sm font-semibold uppercase tracking-[0.2em]">
-          <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#menu-glowne">Menu</a>
           <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#o-nas">O nas</a>
+          <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#menu-glowne">Menu</a>
+          <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#napoje">Napoje</a>
           <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#rezerwacje">Rezerwacje</a>
+          <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#voucher">Voucher</a>
           <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#kontakt">Kontakt</a>
           <a
             href="https://zjedz.my/cesky-film"
@@ -594,7 +671,7 @@
     <main>
       <section
         id="hero"
-        class="film-strip-bottom relative flex min-h-screen items-center justify-center overflow-hidden bg-matte px-5 py-28"
+        class="relative flex min-h-screen items-center justify-center overflow-hidden bg-matte px-5 py-28"
       >
         <div class="absolute inset-0 bg-matte" aria-hidden="true"></div>
         <div
@@ -604,22 +681,22 @@
 
         <div class="relative z-10 mx-auto max-w-5xl text-center">
           <p class="mb-5 text-xs font-bold uppercase tracking-[0.5em] text-copper md:text-sm">
-            Restauracja & Pub
+            Restaurant & Pub
           </p>
-          <h1 class="font-serif text-5xl font-extrabold leading-tight text-pearl md:text-7xl lg:text-8xl">
+          <h1 class="font-serif text-4xl font-extrabold leading-tight text-pearl md:text-6xl lg:text-7xl">
             CZESKI KADR NA MAPIE ŁODZI
           </h1>
           <h2 class="mx-auto mt-6 max-w-3xl text-lg font-medium leading-relaxed text-brass md:text-2xl">
             Autentyczne smaki południowych sąsiadów w historycznym sercu miasta.
           </h2>
           <p class="mx-auto mt-6 max-w-3xl text-base font-light leading-8 text-pearl/80 md:text-lg">
-            Zapraszamy do Český Film - jedynej restauracji w Łodzi, gdzie oryginalne czeskie
+            Zapraszamy do „Český Film” - jedynej restauracji w Łodzi, gdzie oryginalne czeskie
             receptury ożywają w scenerii pofabrycznego kompleksu Scheiblera.
           </p>
 
           <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
-              href="#menu-sezonowe"
+              href="#menu-glowne"
               class="w-full bg-copper px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-[#833121] sm:w-auto"
             >
               Poznaj menu
@@ -636,10 +713,12 @@
         </div>
       </section>
 
-      <section id="kuchnia" class="m-collapsible bg-matte px-5 py-24 md:px-8">
+      <div class="film-divider" aria-hidden="true"></div>
+
+      <section id="o-nas" class="m-collapsible bg-matte px-5 py-24 md:px-8">
         <div class="mx-auto max-w-6xl">
           <div class="text-center">
-            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">KUCHNIA</h2>
+            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">O NAS</h2>
             <p class="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-brass">Jedno jest pewne – nakarmimy Cię po czesku, do syta i nie wyjdziesz od nas głodny.</p>
           </div>
           <div class="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
@@ -649,97 +728,17 @@
               <p class="m-extra leading-relaxed text-[#A0A0A0]">Czechy to smaczna i oryginalna kuchnia. Szef kuchni wraz ze swoim zespołem dbają o jakość serwowanych dań, szukają inspiracji do tworzenia nowości.</p>
             </div>
             <div class="space-y-6">
-              <p class="leading-relaxed text-[#A0A0A0]">W naszej karcie znajdziecie czeskie klasyki: nakládaný hermelín, svíčková na smetaně, pražská šunka, hovězí guláš, smažený sýr, które niezmiennie od lat cieszą się ogromnym powodzeniem wśród naszych Gości.</p>
-              <p class="m-extra leading-relaxed text-[#A0A0A0]">Ale w ofercie znajdziecie Państwo również ręcznie lepione pierogi, sałatki, dania wegetariańskie, desery, a także specjalne menu dla dzieci.</p>
-              <p class="m-extra leading-relaxed text-[#A0A0A0]">A jeśli przyjdzie Wam ochota na GOLONKĘ, to pamiętajcie, że takiej jak w restauracji „Český Film” nie zjecie nigdzie indziej – to nasz as w rękawie.</p>
+              <p class="leading-relaxed text-[#A0A0A0]">W naszej karcie znajdziecie czeskie klasyki: <strong>nakládaný hermelín</strong>, <strong>svíčková na smetaně</strong>, <strong>pražská šunka</strong>, <strong>hovězí guláš</strong>, <strong>smažený sýr</strong>, które niezmiennie od lat cieszą się ogromnym powodzeniem wśród naszych Gości.</p>
+              <p class="m-extra leading-relaxed text-[#A0A0A0]">Ale w ofercie znajdziecie Państwo również <strong>ręcznie lepione pierogi</strong>, sałatki, dania wegetariańskie, desery, a także specjalne menu dla dzieci.</p>
+              <p class="m-extra leading-relaxed text-[#A0A0A0]">A jeśli przyjdzie Wam ochota na <strong>golonkę</strong>, to pamiętajcie, że takiej jak w restauracji „Český Film” nie zjecie nigdzie indziej – to nasz as w rękawie.</p>
               <p class="m-extra leading-relaxed text-[#A0A0A0]">Chcąc urozmaicić nasze menu mamy również dla Państwa dania sezonowe doprawiane szczyptą nowatorskich pomysłów.</p>
             </div>
           </div>
           <button type="button" class="m-only m-more-button text-pearl" aria-expanded="false" data-more>Czytaj więcej</button>
-          <div class="m-swipe mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-3" aria-label="Dania restauracji Český Film">
-            <figure class="mx-auto w-full max-w-xs">
-              <div class="relative aspect-[3/4] overflow-hidden">
-                <img src="./assets/img/zdjecie-09.jpg" alt="Pieczona kaczka z knedlikami i czerwoną kapustą" class="h-full w-full object-cover" width="1086" height="1448" loading="lazy" decoding="async" />
-              </div>
-              <figcaption class="mt-3 text-center text-sm text-[#A0A0A0]">Pieczona kaczka</figcaption>
-            </figure>
-            <figure class="mx-auto w-full max-w-xs">
-              <div class="relative aspect-[3/4] overflow-hidden">
-                <img src="./assets/img/zdjecie-08.jpg" alt="Gulasz wołowy z knedlikami, czerwoną cebulą i ziołami" class="h-full w-full object-cover" width="1086" height="1448" loading="lazy" decoding="async" />
-              </div>
-              <figcaption class="mt-3 text-center text-sm text-[#A0A0A0]">Gulasz wołowy z knedlikami</figcaption>
-            </figure>
-            <figure class="mx-auto w-full max-w-xs">
-              <div class="relative aspect-[3/4] overflow-hidden">
-                <img src="./assets/img/zdjecie-17.jpg" alt="Sernik podany z owocami i sosem na czarnym talerzu" class="h-full w-full object-cover" width="1086" height="1448" loading="lazy" decoding="async" />
-              </div>
-              <figcaption class="mt-3 text-center text-sm text-[#A0A0A0]">Sernik</figcaption>
-            </figure>
-          </div>
         </div>
       </section>
 
-      <section id="menu-sezonowe" class="bg-matte px-5 pb-12 pt-16 md:px-8 lg:pb-16 lg:pt-20">
-        <div
-          class="mx-auto max-w-7xl border border-brass/60 bg-gradient-to-b from-brass/[0.07] to-transparent px-6 py-10 shadow-[0_0_42px_rgba(184,151,94,0.12)] md:px-12 md:py-12"
-        >
-          <div class="text-center">
-            <p class="text-xs font-semibold uppercase tracking-[0.42em] text-pearl">
-              Jesienne smaki prosto z lasu
-            </p>
-            <h2 class="mt-4 font-serif text-4xl font-bold text-brass md:text-5xl">
-              MENU SEZONOWE
-            </h2>
-          </div>
-
-          <div class="mt-12 grid grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2">
-            <article>
-              <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#A0A0A0]">Aperitif</p>
-              <div class="flex items-end gap-3">
-                <h3 class="text-lg font-bold text-pearl">Jeleń biegający po rozmarynie</h3>
-                <span class="mb-1 flex-grow border-b border-dotted border-gray-600"></span>
-                <p class="shrink-0 text-lg font-bold text-copper">32 zł</p>
-              </div>
-              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">Jägermeister, sok pomarańczowy, syrop rozmarynowy, sok z cytryny, rozmaryn.</p>
-            </article>
-            <article>
-              <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#A0A0A0]">Przystawka</p>
-              <div class="flex items-end gap-3">
-                <h3 class="text-lg font-bold text-pearl">Tartaletka z borowikami i porto</h3>
-                <span class="mb-1 flex-grow border-b border-dotted border-gray-600"></span>
-                <p class="shrink-0 text-lg font-bold text-copper">32 zł</p>
-              </div>
-            </article>
-            <article>
-              <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#A0A0A0]">Zupa</p>
-              <div class="flex items-end gap-3">
-                <h3 class="text-lg font-bold text-pearl">Zalewajka łódzka</h3>
-                <span class="mb-1 flex-grow border-b border-dotted border-gray-600"></span>
-                <p class="shrink-0 text-lg font-bold text-copper">31 zł</p>
-              </div>
-              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">Podgrzybki, kiełbasa, ziemniaki, chleb żytni na naturalnym zakwasie.</p>
-            </article>
-            <article>
-              <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#A0A0A0]">Danie główne</p>
-              <div class="flex items-end gap-3">
-                <h3 class="text-lg font-bold text-pearl">Kotlet mielony z jelenia i dzika</h3>
-                <span class="mb-1 flex-grow border-b border-dotted border-gray-600"></span>
-                <p class="shrink-0 text-lg font-bold text-copper">59 zł</p>
-              </div>
-              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">Demi glace z zielonym pieprzem, konfitura z czerwonej cebuli, purée ziemniaczane, chips z dyni.</p>
-            </article>
-            <article>
-              <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#A0A0A0]">Deser</p>
-              <div class="flex items-end gap-3">
-                <h3 class="text-lg font-bold text-pearl">Fondant czekoladowy</h3>
-                <span class="mb-1 flex-grow border-b border-dotted border-gray-600"></span>
-                <p class="shrink-0 text-lg font-bold text-copper">29 zł</p>
-              </div>
-              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">Owoce leśne, rozmaryn.</p>
-            </article>
-          </div>
-        </div>
-      </section>
+      <div class="film-divider" aria-hidden="true"></div>
 
       <section id="menu-glowne" class="bg-matte px-5 pb-16 pt-12 md:px-8 lg:pb-20 lg:pt-16">
         <div class="mx-auto max-w-7xl border-t border-copper/80 pt-12">
@@ -747,21 +746,25 @@
             <h2 class="font-serif text-3xl font-bold leading-tight text-pearl md:text-5xl">
               KLASYKA GATUNKU
             </h2>
-            <p class="mt-5 text-base font-medium text-brass md:text-lg">
-              Nasza stała karta.
-            </p>
             <ul class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-[#A0A0A0]" aria-label="Legenda oznaczeń w menu">
               <li class="inline-flex items-center gap-2">
                 <svg class="h-5 w-5 shrink-0 text-white" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                   <use href="#icon-leaf"></use>
                 </svg>
-                Wege
+                <span data-i18n="wege">Wege</span>
               </li>
               <li class="inline-flex items-center gap-2">
                 <svg class="h-5 w-5 shrink-0 text-[#9E3D2A]" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                   <use href="#icon-chili"></use>
                 </svg>
-                Ostre
+                <span data-i18n="ostre">Ostre</span>
+              </li>
+              <li class="inline-flex items-center">
+                <div class="lang-switch inline-flex items-center gap-1 text-xs font-bold uppercase tracking-[0.18em]" role="group" aria-label="Język karty / Menu language">
+                <button type="button" class="lang-btn" data-lang="pl" aria-pressed="true">PL</button>
+                <span aria-hidden="true">/</span>
+                <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+              </div>
               </li>
             </ul>
           </div>
@@ -775,58 +778,50 @@
 
           <div id="menuPanels" class="mx-auto mt-6 max-w-6xl"></div>
 
-          <p class="mt-14 text-center text-sm text-[#A0A0A0]">
-            Karta alkoholi i win dostępna w lokalu.
-          </p>
         </div>
       </section>
 
-      <section id="o-nas" class="m-collapsible bg-matte px-5 py-24 md:px-8">
-        <div class="mx-auto max-w-6xl">
-          <div class="text-center">
-            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">O NAS</h2>
-          </div>
-          <div class="mt-12 space-y-16">
-            <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-              <div class="space-y-6">
-                <p class="leading-relaxed text-[#A0A0A0]">Restauracja „Český Film” powstała z myślą o podróży po gastronomicznej mapie Czech, ale i z miłości do czeskiej kultury oraz piwa.</p>
-                <p class="leading-relaxed text-[#A0A0A0]">To jedyna w Łodzi restauracja serwująca czeskie specjały oparte na oryginalnych recepturach naszych południowych sąsiadów.</p>
-                <p class="m-extra leading-relaxed text-[#A0A0A0]">Położenie na terenie pofabrycznego kompleksu u Scheiblera jest dodatkowym atutem dla osób, które poza smaczną kuchnią, szukają odpoczynku od miejskiego zgiełku. Nasza lokalizacja pozwala na niespieszne spacery po Księżym Młynie i chwile relaksu na świeżym powietrzu.</p>
-                <p class="m-extra leading-relaxed text-[#A0A0A0]">W okresie letnim dysponujemy ogródkiem sezonowym.</p>
-              </div>
-              <div class="m-photo-wide relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden">
-                <img src="./assets/img/zdjecie-01.jpg" alt="Wnętrze restauracji Český Film z nakrytym stołem, kwiatami i przytulnym miejscem przy oknie" class="h-full w-full object-cover" width="1090" height="1443" loading="lazy" decoding="async" />
-                <div class="pointer-events-none absolute inset-0 bg-black/30"></div>
-              </div>
+      <div class="film-divider" aria-hidden="true"></div>
+
+      <section id="napoje" class="bg-matte px-5 py-24 md:px-8">
+        <div class="mx-auto max-w-7xl">
+          <div class="mx-auto max-w-4xl text-center">
+            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">NAPOJE</h2>
+            <div class="mx-auto mt-6 max-w-3xl space-y-4">
+              <p class="leading-relaxed text-[#A0A0A0]">Oprócz czeskiego piwa w ofercie restauracji „Český Film” znajdziecie też inne destylaty, a wśród nich nie może oczywiście zabraknąć śliwowicy i gruszkowicy z destylarni Rudolfa Jelínka. Mamy także wina (w wersji bezalkoholowej też), wódki, whisky, drinki…</p>
+              <p class="leading-relaxed text-[#A0A0A0]">Wśród napojów prym wiedzie Kofola.</p>
+              <p class="leading-relaxed text-[#A0A0A0]">Sezonowo przygotowujemy dla Państwa ofertę z lemoniadami i letnimi mocktailami oraz na chłodniejsze dni napoje rozgrzewające.</p>
             </div>
-            <div class="m-extra grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-              <div class="order-last lg:order-first">
-                <div class="m-photo-wide relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden">
-                <img src="./assets/img/zdjecie-03.jpg" alt="Wnętrze Český Film z filmową fototapetą i długimi stołami" class="h-full w-full object-cover" width="1086" height="1448" loading="lazy" decoding="async" />
-                <div class="pointer-events-none absolute inset-0 bg-black/30"></div>
-              </div>
-              </div>
-              <div class="space-y-6">
-                <p class="leading-relaxed text-[#A0A0A0]">Poza tradycyjnymi daniami kuchni czeskiej w naszym menu znajdziecie Państwo również tematyczne wkładki, które nawiązują do pór roku, sezonowych i regionalnych produktów…</p>
-                <p class="leading-relaxed text-[#A0A0A0]">„Český Film” to również oferta piw z browaru Černá Hora – u nas napijesz się wyjątkowych czeskich piw, które zapewne podbiją serca niejednego miłośnika złotego trunku – 5 rodzajów na kranach oraz kilkanaście propozycji piw butelkowanych.</p>
-                <p class="leading-relaxed text-[#A0A0A0]">Jednak nie tylko kuchnią i piwem „Český Film” stoi.</p>
-                <p class="leading-relaxed text-[#A0A0A0]">Naszą restaurację tworzy również wyjątkowa załoga, nieformalna atmosfera oraz wystrój, które przeniosą Was wprost do Czech.</p>
+            <div class="mt-6 flex justify-center text-xs text-[#A0A0A0]">
+              <div class="lang-switch inline-flex items-center gap-1 text-xs font-bold uppercase tracking-[0.18em]" role="group" aria-label="Język karty / Menu language">
+                <button type="button" class="lang-btn" data-lang="pl" aria-pressed="true">PL</button>
+                <span aria-hidden="true">/</span>
+                <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
               </div>
             </div>
           </div>
-          <button type="button" class="m-only m-more-button text-pearl" aria-expanded="false" data-more>Czytaj więcej</button>
+
+          <div
+            id="drinkTabs"
+            class="hide-scrollbar mx-auto mt-6 flex max-w-5xl gap-3 overflow-x-auto border-b border-[#333333] md:flex-wrap md:justify-center"
+            role="tablist"
+            aria-label="Kategorie karty napojów"
+          ></div>
+
+          <div id="drinkPanels" class="mx-auto mt-6 max-w-6xl"></div>
         </div>
       </section>
-
-      <div class="bg-matte px-5 md:px-8" aria-hidden="true">
-        <div class="mx-auto h-px max-w-6xl bg-gradient-to-r from-transparent via-[#B8975E]/50 to-transparent"></div>
-      </div>
+      <div class="film-divider" aria-hidden="true"></div>
 
       <section id="piwo" class="bg-matte px-5 py-24 md:px-8">
         <div class="mx-auto max-w-6xl">
           <div class="text-center">
             <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">PIVOVAR ČERNÁ HORA I NASZE PIWA</h2>
             <p class="mt-4 text-sm font-semibold uppercase tracking-[0.28em] text-brass">Gdzie się piwo pije, tam się dobrze żyje</p>
+          </div>
+
+          <div class="relative mx-auto mt-10 aspect-[3/2] w-full max-w-md overflow-hidden">
+            <img src="./assets/img/cerna-hora-logo.jpg" alt="Podświetlane logo browaru Černá Hora z datą 1298" class="h-full w-full object-cover" width="1200" height="795" loading="lazy" decoding="async" />
           </div>
 
           <div class="m-beers mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -900,6 +895,10 @@
               <h3 class="font-serif text-2xl font-bold text-pearl">Řezané</h3>
               <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">Pół kufla Medová, pół Granát</p>
             </article>
+            <article class="col-span-full flex flex-col items-center border border-[#B8975E]/25 px-6 py-6 text-center">
+              <h3 class="font-serif text-2xl font-bold uppercase text-pearl">Zestaw degustacyjny</h3>
+              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">5 piw po 150 ml</p>
+            </article>
           </div>
           <p class="mt-5 text-center text-sm leading-6 text-[#A0A0A0]">Oferta piw butelkowanych zmienia się — zapytajcie kelnerów o aktualny wybór.</p>
 
@@ -920,51 +919,59 @@
                   <h4 class="font-serif text-2xl font-bold text-pearl">1996</h4>
                   <p class="text-sm leading-6 text-[#A0A0A0]">Browar działa jako spółka pod nazwą Pivovar Černá Hora.</p>
                 </li>
+                <li class="grid grid-cols-[4.5rem_1fr] items-center gap-4">
+                  <h4 class="font-serif text-2xl font-bold text-pearl">2011</h4>
+                  <p class="text-sm leading-6 text-[#A0A0A0]">Od tego roku piwo Černá Hora w łódzkiej restauracji „Český Film”.</p>
+                </li>
               </ol>
             </div>
-            <figure class="mx-auto w-full max-w-sm">
-              <div class="m-photo-wide relative aspect-[3/4] overflow-hidden">
-                <img src="./assets/img/zdjecie-06.jpg" alt="Bar restauracji Český Film z kranami piwnymi Černá Hora" class="h-full w-full object-cover" width="1024" height="1536" loading="lazy" decoding="async" />
+            <figure class="mx-auto w-full max-w-lg">
+              <div class="relative aspect-[3/2] overflow-hidden">
+                <img src="./assets/img/bar-cerna-hora.jpg" alt="Bar restauracji „Český Film” z kranami piwnymi Černá Hora" class="h-full w-full object-cover" width="1200" height="797" loading="lazy" decoding="async" />
                 <div class="pointer-events-none absolute inset-0 bg-black/30"></div>
               </div>
-              <figcaption class="mt-3 text-xs leading-5 text-[#A0A0A0]">Bar Český Film · piwa Černá Hora</figcaption>
             </figure>
           </div>
         </div>
       </section>
 
-      <section id="napoje" class="bg-matte px-5 py-24 md:px-8">
-        <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 lg:grid-cols-3 lg:gap-12">
-          <div>
-            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">ALKOHOLE I NAPOJE</h2>
-          </div>
-          <div class="space-y-6 lg:col-span-2">
-            <p class="leading-relaxed text-[#A0A0A0]">Oprócz czeskiego piwa w ofercie restauracji „Český Film” znajdziecie też inne destylaty, a wśród nich nie może oczywiście zabraknąć śliwowicy i gruszkowicy z destylarni Rudolfa Jelínka. Mamy także wina (w wersji bezalkoholowej też), wódki, whisky, drinki…</p>
-            <p class="leading-relaxed text-[#A0A0A0]">Wśród napojów prym wiedzie Kofola.</p>
-            <p class="leading-relaxed text-[#A0A0A0]">Sezonowo przygotowujemy dla Państwa ofertę z lemoniadami i letnimi mocktailami oraz na chłodniejsze dni napoje rozgrzewające.</p>
-
-          </div>
-        </div>
-      </section>
+      <div class="film-divider" aria-hidden="true"></div>
 
       <section id="rezerwacje" class="m-collapsible bg-matte px-5 py-24 md:px-8">
         <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
           <div>
             <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">REZERWACJE</h2>
             <div class="mt-8 space-y-6">
-              <p class="leading-relaxed text-[#A0A0A0]">Informujemy, że aktualnie (od poniedziałku do czwartku) nie ma obowiązku rezerwowania stolików. Natomiast w weekendy sugerujemy dokonanie rezerwacji.</p>
-              <p class="leading-relaxed text-[#A0A0A0]">Organizujemy spotkania biznesowe, eventy firmowe oraz rodzinne obiady i kolacje: imieninowe, urodzinowe, jubileuszowe, a także po uroczystościach ślubu, chrztu, komunii i pogrzebu. Dla grup od 20 do 40 osób proponujemy osobną salę Riposta.</p>
+              <p class="leading-relaxed text-[#A0A0A0]">Organizujemy spotkania biznesowe, eventy firmowe oraz rodzinne obiady i kolacje: imieninowe, urodzinowe, jubileuszowe, a także po uroczystościach ślubu, chrztu, komunii i pogrzebu. Dla grup proponujemy osobną salę Riposta.</p>
               <p class="m-extra leading-relaxed text-[#A0A0A0]">Nasz zespół zadba o każdy szczegół spotkania — od dekoracji stołów po przygotowanie menu dopasowanego do Państwa oczekiwań i upodobań. Zapraszamy do kontaktu i omówienia szczegółów rezerwacji.</p>
             </div>
             <button type="button" class="m-only m-more-button text-pearl" aria-expanded="false" data-more>Czytaj więcej</button>
             <a href="tel:+48881403888" class="mt-8 inline-flex border border-copper px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-copper transition-all duration-300 hover:bg-copper hover:text-white">Zadzwoń do nas</a>
           </div>
           <div class="relative mx-auto aspect-[4/3] w-full max-w-lg overflow-hidden">
-            <img src="./assets/img/zdjecie-02.jpg" alt="Sala restauracji Český Film ze stołami przygotowanymi na przyjęcie" class="h-full w-full object-cover" width="1448" height="1086" loading="lazy" decoding="async" />
+            <img src="./assets/img/zdjecie-02.jpg" alt="Sala restauracji „Český Film” ze stołami przygotowanymi na przyjęcie" class="h-full w-full object-cover" width="1448" height="1086" loading="lazy" decoding="async" />
             <div class="pointer-events-none absolute inset-0 bg-black/30"></div>
           </div>
         </div>
       </section>
+
+      <div class="film-divider" aria-hidden="true"></div>
+
+      <section id="voucher" class="bg-matte px-5 py-24 md:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">VOUCHER</h2>
+          <div class="mt-6 space-y-4">
+            <p class="leading-relaxed text-[#A0A0A0]">Jeśli szukasz upominku, ale nie wiesz, co będzie najlepszym pomysłem, wybierz voucher do restauracji „Český Film”.</p>
+            <p class="leading-relaxed text-[#A0A0A0]">Voucher sprawdzi się z okazji świąt, urodzin i uroczystości rodzinnych oraz jako upominek dla współpracowników lub klientów.</p>
+            <p class="leading-relaxed text-[#A0A0A0]">Voucher można zamówić telefonicznie lub mailowo.</p>
+          </div>
+          <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a href="tel:+48881403888" class="inline-flex border border-copper px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-copper transition-all duration-300 hover:bg-copper hover:text-white">+48 881 403 888</a>
+            <a href="mailto:restauracja@ceskyfilm.pl" class="inline-flex border border-copper px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-copper transition-all duration-300 hover:bg-copper hover:text-white">restauracja@ceskyfilm.pl</a>
+          </div>
+        </div>
+      </section>
+      <div class="film-divider" aria-hidden="true"></div>
 
       <section id="kontakt" class="bg-matte px-5 pb-16 pt-8 md:px-8 lg:pb-20 lg:pt-10">
         <div class="mx-auto max-w-6xl">
@@ -1030,7 +1037,7 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
 
             <div class="relative min-h-[350px] overflow-hidden rounded-sm border border-gray-800 bg-black">
               <iframe
-                title="Mapa dojazdu do restauracji Český Film w Łodzi"
+                title="Mapa dojazdu do restauracji „Český Film” w Łodzi"
                 src="https://www.google.com/maps?q=%C4%8Cesk%C3%BD%20Film%20%C5%81%C3%B3d%C5%BA%20Tymienieckiego&output=embed"
                 class="absolute inset-0 h-full w-full"
                 loading="lazy"
@@ -1048,7 +1055,7 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
       target="_blank"
       rel="noopener noreferrer"
       class="booking-float group fixed bottom-5 right-5 z-[70] flex max-w-[calc(100vw-2.5rem)] items-center gap-3 bg-copper p-2.5 pr-5 text-white transition duration-300 hover:-translate-y-1 hover:bg-[#833121] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brass md:bottom-7 md:right-7 md:gap-4 md:p-3 md:pr-6"
-      aria-label="Zarezerwuj stolik w Český Film przez zjedz.my — otwiera się w nowej karcie"
+      aria-label="Zarezerwuj stolik w „Český Film” przez zjedz.my — otwiera się w nowej karcie"
     >
       <span
         class="booking-float-icon flex h-11 w-11 shrink-0 items-center justify-center bg-matte/20 transition-transform duration-300 md:h-12 md:w-12"
@@ -1082,7 +1089,7 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
     <footer class="border-t border-gray-900 bg-black px-5 py-8 md:px-8">
       <div class="mx-auto flex max-w-6xl flex-col items-center justify-center text-center">
         <p class="text-xs text-gray-500">
-          © 2026 Český Film. Wszelkie prawa zastrzeżone.
+          © 2026 „Český Film”. Wszelkie prawa zastrzeżone.
         </p>
       </div>
     </footer>
@@ -1091,134 +1098,310 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
       // KARTA DAŃ — edytuj tutaj. Zakładki i pozycje w sekcji #menu-glowne
       // generują się z tej listy (kolejność na stronie = kolejność w liście).
       // Pola dania:
-      //   nazwa     — nazwa wyświetlana na stronie
-      //   nazwaCz   — oryginalna nazwa z czeskiej karty (na stronie nie jest pokazywana)
-      //   skladniki — lista składników, na stronie łączona przecinkami
-      //   cena      — tekst ceny, np. "26 zł", "66 / 124 zł", "od 49 zł"
-      //   uwagi     — opcjonalnie, tekst po składnikach (np. czas oczekiwania)
-      //   wege      — opcjonalnie true: ikona liścia
-      //   ostre     — opcjonalnie true: ikona papryczki
-      //   zdjecie   — opcjonalnie ścieżka do zdjęcia: przycisk z podglądem
+      //   nazwa       — nazwa wyświetlana na stronie (PL)
+      //   en          — nazwa w wersji angielskiej (przełącznik PL / EN)
+      //   nazwaCz     — oryginalna nazwa z czeskiej karty (na stronie nie jest pokazywana)
+      //   skladniki   — lista składników, na stronie łączona przecinkami
+      //   skladnikiEn — lista składników po angielsku
+      //   cena        — tekst ceny, np. "26 zł", "66 / 124 zł", "od 49 zł"
+      //   uwagi       — opcjonalnie, tekst po składnikach (np. czas oczekiwania); uwagiEn po angielsku
+      //   rodzaj      — opcjonalnie, mały napis nad nazwą (np. "Zupa"); rodzajEn po angielsku
+      //   wege        — opcjonalnie true: ikona liścia
+      //   ostre       — opcjonalnie true: ikona papryczki
+      //   zdjecie     — opcjonalnie ścieżka do zdjęcia: przycisk z podglądem
       const MENU = [
+        {
+          id: "sezonowe",
+          kategoria: "Menu sezonowe",
+          kategoriaEn: "Seasonal menu",
+          dania: [
+            { rodzaj: "Aperitif", rodzajEn: "Aperitif", nazwa: "Jeleń biegający po rozmarynie", en: "Deer running through rosemary", skladniki: ["Jägermeister", "sok pomarańczowy", "syrop rozmarynowy", "sok z cytryny", "rozmaryn"], skladnikiEn: ["Jägermeister", "orange juice", "rosemary syrup", "lemon juice", "rosemary"], cena: "32 zł" },
+            { rodzaj: "Przystawka", rodzajEn: "Starter", nazwa: "Tartaletka z borowikami i porto", en: "Tartlet with porcini mushrooms and port", skladniki: [], cena: "32 zł" },
+            { rodzaj: "Zupa", rodzajEn: "Soup", nazwa: "Zalewajka łódzka", en: "Łódź-style sour rye soup (zalewajka)", skladniki: ["podgrzybki", "kiełbasa", "ziemniaki", "chleb żytni na naturalnym zakwasie"], skladnikiEn: ["bay bolete mushrooms", "sausage", "potatoes", "sourdough rye bread"], cena: "31 zł" },
+            { rodzaj: "Danie główne", rodzajEn: "Main course", nazwa: "Kotlet mielony z jelenia i dzika", en: "Venison and wild boar patty", skladniki: ["demi glace z zielonym pieprzem", "konfitura z czerwonej cebuli", "purée ziemniaczane", "chips z dyni"], skladnikiEn: ["demi-glace with green pepper", "red onion jam", "mashed potatoes", "pumpkin chips"], cena: "59 zł" },
+            { rodzaj: "Deser", rodzajEn: "Dessert", nazwa: "Fondant czekoladowy", en: "Chocolate fondant", skladniki: ["owoce leśne", "rozmaryn"], skladnikiEn: ["forest berries", "rosemary"], cena: "29 zł" },
+          ],
+        },
         {
           id: "przekaski",
           kategoria: "Przekąski i przystawki",
+          kategoriaEn: "Snacks and starters",
           dania: [
-            { nazwa: "Frytki chlebowe", nazwaCz: "Křupavé topinky s česnekovo-sýrovým dipem", skladniki: ["dip serowo-czosnkowy"], cena: "26 zł", wege: true, zdjecie: "./assets/img/zdjecie-24.jpg" },
-            { nazwa: "Krążki cebulowe w panierce", nazwaCz: "Cibulové kroužky / tatarská omáčka", skladniki: ["sos tatarski"], cena: "26 zł", wege: true, zdjecie: "./assets/img/zdjecie-26.jpg" },
-            { nazwa: "Ciepłe przekąski dla piwosza (dla 2 osób)", nazwaCz: "Teplé občerstvení pro milovníky piva (pro 2 osoby)", skladniki: [], cena: "59 zł" },
-            { nazwa: "Mięsa i wędliny z dziczyzny (dla 2 / 4 osób)", nazwaCz: "Talíř mas a uzenin z diviny / výběr sýrů / kyselé okurky / džem – pro 2/4 osoby", skladniki: ["wybór serów", "pikle", "konfitury"], cena: "66 / 124 zł" },
-            { nazwa: "Czeski ser Hermelín", nazwaCz: "Nakládaný hermelín / kysané zelí / pumpernikiel", skladniki: ["kiszona kapusta", "pumpernikiel"], cena: "29 zł", wege: true, zdjecie: "./assets/img/zdjecie-15.jpg" },
-            { nazwa: "Ser ołomuniecki", nazwaCz: "Olomoucké tvarůžky / koření / česnek / topinky", skladniki: ["przyprawy", "czosnkowe grzanki", "piwo"], cena: "29 zł", wege: true },
-            { nazwa: "Tatar z polędwicy wołowej", nazwaCz: "Tatarák z hovězí svíčkové / cibule / nakládaná okurka / křepelčí vejce", skladniki: ["cebula", "ogórek kiszony", "pieczarki", "jajko przepiórcze"], cena: "48 zł", zdjecie: "./assets/img/zdjecie-19.jpg" },
+            { nazwa: "Mięsa i wędliny z dziczyzny (dla 2 / 4 osób)", en: "Game meats and cold cuts (for 2 / 4 people)", nazwaCz: "Talíř mas a uzenin z diviny / výběr sýrů / kyselé okurky / džem – pro 2/4 osoby", skladniki: ["wybór serów", "pikle", "konfitury"], skladnikiEn: ["selection of cheeses", "pickles", "preserves"], cena: "66 / 124 zł" },
+            { nazwa: "Czeski ser Hermelín", en: "Czech Hermelín cheese", nazwaCz: "Nakládaný hermelín / kysané zelí / pumpernikiel", skladniki: ["kiszona kapusta", "pumpernikiel"], skladnikiEn: ["sauerkraut", "pumpernickel"], cena: "29 zł", wege: true, zdjecie: "./assets/img/zdjecie-15.jpg" },
+            { nazwa: "Ser ołomuniecki", en: "Olomouc cheese (Olomoucké tvarůžky)", nazwaCz: "Olomoucké tvarůžky / koření / česnek / topinky", skladniki: ["przyprawy", "czosnkowe grzanki", "piwo"], skladnikiEn: ["spices", "garlic toasts", "beer"], cena: "29 zł", wege: true },
+            { nazwa: "Tatar z polędwicy wołowej", en: "Beef tenderloin tartare", nazwaCz: "Tatarák z hovězí svíčkové / cibule / nakládaná okurka / křepelčí vejce", skladniki: ["cebula", "ogórek kiszony", "pieczarki", "jajko przepiórcze"], skladnikiEn: ["onion", "pickled cucumber", "mushrooms", "quail egg"], cena: "48 zł", zdjecie: "./assets/img/zdjecie-19.jpg" },
+            { nazwa: "Frytki chlebowe", en: "Bread fries", nazwaCz: "Křupavé topinky s česnekovo-sýrovým dipem", skladniki: ["dip serowo-czosnkowy"], skladnikiEn: ["cheese and garlic dip"], cena: "26 zł", wege: true, zdjecie: "./assets/img/zdjecie-24.jpg" },
+            { nazwa: "Krążki cebulowe w panierce", en: "Breaded onion rings", nazwaCz: "Cibulové kroužky / tatarská omáčka", skladniki: ["sos tatarski"], skladnikiEn: ["tartar sauce"], cena: "26 zł", wege: true, zdjecie: "./assets/img/zdjecie-26.jpg" },
+            { nazwa: "Ciepłe przekąski dla piwosza (dla 2 osób)", en: "Hot beer snacks (for 2 people)", nazwaCz: "Teplé občerstvení pro milovníky piva (pro 2 osoby)", skladniki: [], cena: "59 zł" },
           ],
         },
         {
           id: "zupy",
           kategoria: "Zupy",
+          kategoriaEn: "Soups",
           dania: [
-            { nazwa: "Krem ziemniaczany", nazwaCz: "Bramborový krém se slaninovým chipsem a brynzou", skladniki: ["boczek", "ser bryndza"], cena: "24 zł" },
-            { nazwa: "Česnečka – zupa czosnkowa", nazwaCz: "Česnečka", skladniki: ["klarowny bulion", "czosnek", "białko", "grzanka serowa"], cena: "24 zł", zdjecie: "./assets/img/zdjecie-04.jpg" },
-            { nazwa: "Klarowny rosół z gęsi", nazwaCz: "Husí vývar / knedlíčky s husím masem / petržel", skladniki: ["kołduny z mięsem gęsi", "natka pietruszki"], cena: "26 zł", zdjecie: "./assets/img/zdjecie-23.jpg" },
-            { nazwa: "Zupa cebulowa", nazwaCz: "Cibulačka / bílé víno / rajčata / sýrové krutony", skladniki: ["białe wino", "pomidor", "grzanki z serem"], cena: "25 zł", zdjecie: "./assets/img/zdjecie-22.jpg" },
-            { nazwa: "Pomidorowa z makaronem", nazwaCz: "Rajčatová polévka s těstovinami", skladniki: [], cena: "24 zł", zdjecie: "./assets/img/zdjecie-21.jpg" },
+            { nazwa: "Krem ziemniaczany", en: "Potato cream soup", nazwaCz: "Bramborový krém se slaninovým chipsem a brynzou", skladniki: ["boczek", "ser bryndza"], skladnikiEn: ["bacon", "bryndza cheese"], cena: "24 zł" },
+            { nazwa: "Česnečka – zupa czosnkowa", en: "Česnečka – garlic soup", nazwaCz: "Česnečka", skladniki: ["klarowny bulion", "czosnek", "białko", "grzanka serowa"], skladnikiEn: ["clear broth", "garlic", "egg white", "cheese toast"], cena: "24 zł", zdjecie: "./assets/img/zdjecie-04.jpg" },
+            { nazwa: "Klarowny rosół z gęsi", en: "Clear goose broth", nazwaCz: "Husí vývar / knedlíčky s husím masem / petržel", skladniki: ["kołduny z mięsem gęsi", "natka pietruszki"], skladnikiEn: ["goose meat dumplings", "parsley"], cena: "26 zł", zdjecie: "./assets/img/zdjecie-23.jpg" },
+            { nazwa: "Zupa cebulowa", en: "Onion soup", nazwaCz: "Cibulačka / bílé víno / rajčata / sýrové krutony", skladniki: ["białe wino", "pomidor", "grzanki z serem"], skladnikiEn: ["white wine", "tomato", "cheese croutons"], cena: "25 zł", zdjecie: "./assets/img/zdjecie-22.jpg" },
+            { nazwa: "Pomidorowa z makaronem", en: "Tomato soup with pasta", nazwaCz: "Rajčatová polévka s těstovinami", skladniki: [], cena: "24 zł", zdjecie: "./assets/img/zdjecie-21.jpg" },
           ],
         },
         {
           id: "dzieci",
           kategoria: "Menu dla dzieci",
+          kategoriaEn: "Kids' menu",
           dania: [
-            { nazwa: "Zupa pomidorowa z makaronem", nazwaCz: "Rajská polévka s těstovinami", skladniki: [], cena: "15 zł" },
-            { nazwa: "Polędwiczki drobiowe panierowane", nazwaCz: "Kuřecí nugety / hranolky / salát z mrkve a jablek", skladniki: ["frytki", "surówka z marchewki z jabłkiem"], cena: "25 zł" },
-            { nazwa: "Pulpety z indyka", nazwaCz: "Krůtí masové kuličky / rajská omáčka, bramborová kaše", skladniki: ["sos pomidorowy", "purée ziemniaczane"], cena: "26 zł" },
-            { nazwa: "Deser lodowy", nazwaCz: "Zmrzlinový dezert – zmrzlina / ovocní pěna / šlehačka", skladniki: ["lody", "mus owocowy", "bita śmietana"], cena: "18 zł" },
+            { nazwa: "Zupa pomidorowa / rosół z makaronem", en: "Tomato soup / broth with pasta", nazwaCz: "Rajská polévka s těstovinami", skladniki: [], cena: "15 zł" },
+            { nazwa: "Polędwiczki drobiowe panierowane", en: "Breaded chicken tenders", nazwaCz: "Kuřecí nugety / hranolky / salát z mrkve a jablek", skladniki: ["frytki", "surówka z marchewki z jabłkiem"], skladnikiEn: ["fries", "carrot and apple salad"], cena: "25 zł" },
+            { nazwa: "Pulpety z indyka", en: "Turkey meatballs", nazwaCz: "Krůtí masové kuličky / rajská omáčka, bramborová kaše", skladniki: ["sos pomidorowy", "purée ziemniaczane"], skladnikiEn: ["tomato sauce", "mashed potatoes"], cena: "26 zł" },
+            { nazwa: "Deser lodowy", en: "Ice cream dessert", nazwaCz: "Zmrzlinový dezert – zmrzlina / ovocní pěna / šlehačka", skladniki: ["lody", "mus owocowy", "bita śmietana"], skladnikiEn: ["ice cream", "fruit mousse", "whipped cream"], cena: "18 zł" },
           ],
         },
         {
           id: "drob",
           kategoria: "Dania z drobiu",
+          kategoriaEn: "Poultry",
           dania: [
-            { nazwa: "Pół pieczonej kaczki", nazwaCz: "Půlka pečené kachny / knedlík se sušeným ovocem / červené zelí s brusinkami", skladniki: ["knedliki z suszonymi owocami", "czerwona kapusta z żurawiną"], cena: "74 zł", zdjecie: "./assets/img/zdjecie-09.jpg" },
-            { nazwa: "Filet kurczaka kukurydzianego", nazwaCz: "Kukuřičné kuře – prsa / bramborová kaše / salát vinaigrette", skladniki: ["purée ziemniaczane", "sałata winegret"], cena: "46 zł", zdjecie: "./assets/img/zdjecie-25.jpg" },
-            { nazwa: "Pierogi z mięsem gęsi", nazwaCz: "Ručně vyráběné knedlíky s husím masem / moravské smažené zelí", skladniki: ["morawska zasmażana kapusta"], cena: "45 zł", zdjecie: "./assets/img/zdjecie-20.jpg" },
+            { nazwa: "Pół pieczonej kaczki", en: "Half a roast duck", nazwaCz: "Půlka pečené kachny / knedlík se sušeným ovocem / červené zelí s brusinkami", skladniki: ["knedliki z suszonymi owocami", "czerwona kapusta z żurawiną"], skladnikiEn: ["dumplings with dried fruit", "red cabbage with cranberries"], cena: "74 zł", zdjecie: "./assets/img/zdjecie-09.jpg" },
+            { nazwa: "Filet kurczaka kukurydzianego", en: "Corn-fed chicken breast", nazwaCz: "Kukuřičné kuře – prsa / bramborová kaše / salát vinaigrette", skladniki: ["purée ziemniaczane", "sałata winegret"], skladnikiEn: ["mashed potatoes", "salad with vinaigrette"], cena: "46 zł", zdjecie: "./assets/img/zdjecie-25.jpg" },
+            { nazwa: "Pierogi z mięsem gęsi", en: "Dumplings (pierogi) with goose meat", nazwaCz: "Ručně vyráběné knedlíky s husím masem / moravské smažené zelí", skladniki: ["morawska zasmażana kapusta"], skladnikiEn: ["Moravian fried cabbage"], cena: "45 zł", zdjecie: "./assets/img/zdjecie-20.jpg" },
           ],
         },
         {
           id: "mieso",
           kategoria: "Dania mięsne",
+          kategoriaEn: "Meat dishes",
           dania: [
-            { nazwa: "Czeskie specjały dla 4 osób", nazwaCz: "České speciality pro 4 osoby (svíčková, bramborák, hovězí guláš, krkovice, moravské zelí, knedlíky)", skladniki: ["ser wyprażany", "bramborak", "gulasz", "karczek", "knedliki", "kapusta zasmażana morawska"], cena: "218 zł" },
-            { nazwa: "Svíčková na smetaně", nazwaCz: "Svíčková na smetaně", skladniki: ["udziec wołowy", "sos śmietanowo-warzywny", "knedliki", "morawska zasmażana kapusta", "żurawina", "śmietana"], cena: "56 zł", zdjecie: "./assets/img/zdjecie-28.jpg" },
-            { nazwa: "Praska szynka", nazwaCz: "Pražská šunka", skladniki: ["sos chrzanowo-śmietanowy", "knedliki", "morawska zasmażana kapusta"], cena: "52 zł", zdjecie: "./assets/img/zdjecie-13.jpg" },
-            { nazwa: "Gulasz wołowy z pieczarkami", nazwaCz: "Hovězí guláš", skladniki: ["knedliki", "morawska zasmażana kapusta"], cena: "52 zł", zdjecie: "./assets/img/zdjecie-08.jpg" },
-            { nazwa: "Bramborák", nazwaCz: "Bramborák", skladniki: ["placki ziemniaczane", "praska szynka", "kapusta zasmażana", "kwaśna śmietana"], cena: "52 zł", zdjecie: "./assets/img/zdjecie-29.jpg" },
-            { nazwa: "Karczek w ziołach", nazwaCz: "Vepřo-knedlo-zelo", skladniki: ["knedliki", "zasmażana kapusta"], cena: "49 zł", zdjecie: "./assets/img/zdjecie-10.jpg" },
-            { nazwa: "Pieczona golonka (800 g)", nazwaCz: "Pečené vepřové koleno", skladniki: ["kwaśna kapusta"], uwagi: "Czas oczekiwania: 50 minut.", cena: "98 zł", zdjecie: "./assets/img/zdjecie-07.jpg" },
-            { nazwa: "Stek z czarnego Angusa", nazwaCz: "Steak z černého Angusu / salát vinaigrette", skladniki: ["sałata winegret"], uwagi: "Sos do wyboru (9 zł): chimichurri, z zielonym pieprzem, czosnkowy.", cena: "114 zł" },
-            { nazwa: "Sznycel cielęcy po wiedeńsku", nazwaCz: "Telecí vídeňský řízek / bramborová kaše / salát vinaigrette", skladniki: ["purée ziemniaczane", "sałata winegret"], cena: "72 zł", zdjecie: "./assets/img/zdjecie-18.jpg" },
+            { nazwa: "Czeskie specjały dla 4 osób", en: "Czech specialities for 4 people", nazwaCz: "České speciality pro 4 osoby (svíčková, bramborák, hovězí guláš, krkovice, moravské zelí, knedlíky)", skladniki: ["ser wyprażany", "bramborak", "gulasz", "karczek", "knedliki", "kapusta zasmażana morawska"], skladnikiEn: ["fried cheese", "bramborák", "goulash", "pork neck", "dumplings", "Moravian fried cabbage"], cena: "218 zł" },
+            { nazwa: "Svíčková na smetaně", en: "Svíčková na smetaně – beef in cream sauce", nazwaCz: "Svíčková na smetaně", skladniki: ["udziec wołowy", "sos śmietanowo-warzywny", "knedliki", "morawska zasmażana kapusta", "żurawina", "śmietana"], skladnikiEn: ["beef round", "vegetable cream sauce", "dumplings", "Moravian fried cabbage", "cranberries", "cream"], cena: "56 zł", zdjecie: "./assets/img/zdjecie-28.jpg" },
+            { nazwa: "Praska szynka", en: "Prague ham", nazwaCz: "Pražská šunka", skladniki: ["sos chrzanowo-śmietanowy", "knedliki", "morawska zasmażana kapusta"], skladnikiEn: ["horseradish cream sauce", "dumplings", "Moravian fried cabbage"], cena: "52 zł", zdjecie: "./assets/img/zdjecie-13.jpg" },
+            { nazwa: "Gulasz wołowy z pieczarkami", en: "Beef goulash with mushrooms", nazwaCz: "Hovězí guláš", skladniki: ["knedliki", "morawska zasmażana kapusta"], skladnikiEn: ["dumplings", "Moravian fried cabbage"], cena: "52 zł", zdjecie: "./assets/img/zdjecie-08.jpg" },
+            { nazwa: "Bramborák", en: "Bramborák", nazwaCz: "Bramborák", skladniki: ["placki ziemniaczane", "praska szynka", "kapusta zasmażana", "kwaśna śmietana"], skladnikiEn: ["potato pancakes", "Prague ham", "fried cabbage", "sour cream"], cena: "52 zł", zdjecie: "./assets/img/zdjecie-29.jpg" },
+            { nazwa: "Karczek w ziołach", en: "Herb pork neck", nazwaCz: "Vepřo-knedlo-zelo", skladniki: ["knedliki", "zasmażana kapusta"], skladnikiEn: ["dumplings", "fried cabbage"], cena: "49 zł", zdjecie: "./assets/img/zdjecie-10.jpg" },
+            { nazwa: "Pieczona golonka (800 g)", en: "Roast pork knuckle (800 g)", nazwaCz: "Pečené vepřové koleno", skladniki: ["kwaśna kapusta"], skladnikiEn: ["sauerkraut"], uwagi: "Czas oczekiwania: 50 minut.", uwagiEn: "Waiting time: 50 minutes.", cena: "98 zł", zdjecie: "./assets/img/zdjecie-07.jpg" },
+            { nazwa: "Stek z czarnego Angusa", en: "Black Angus steak", nazwaCz: "Steak z černého Angusu / salát vinaigrette", skladniki: ["sałata winegret"], skladnikiEn: ["salad with vinaigrette"], uwagi: "Sos do wyboru (9 zł): chimichurri, z zielonym pieprzem, czosnkowy.", uwagiEn: "Sauce of your choice (9 zł): chimichurri, green pepper, garlic.", cena: "114 zł" },
+            { nazwa: "Sznycel cielęcy po wiedeńsku", en: "Viennese veal schnitzel", nazwaCz: "Telecí vídeňský řízek / bramborová kaše / salát vinaigrette", skladniki: ["purée ziemniaczane", "sałata winegret"], skladnikiEn: ["mashed potatoes", "salad with vinaigrette"], cena: "72 zł", zdjecie: "./assets/img/zdjecie-18.jpg" },
           ],
         },
         {
           id: "ryby",
           kategoria: "Dania rybne",
+          kategoriaEn: "Fish",
           dania: [
-            { nazwa: "Łosoś", nazwaCz: "Losos / kořenová zelenina / jogurtová omáčka s bylinkami", skladniki: ["warzywa korzeniowe", "sos jogurtowo-ziołowy"], cena: "59 zł" },
-            { nazwa: "Ryba dnia", nazwaCz: "Ryba denní nabídka", skladniki: [], cena: "od 49 zł" },
+            { nazwa: "Łosoś", en: "Salmon", nazwaCz: "Losos / kořenová zelenina / jogurtová omáčka s bylinkami", skladniki: ["warzywa korzeniowe", "sos jogurtowo-ziołowy"], skladnikiEn: ["root vegetables", "herb yoghurt sauce"], cena: "59 zł" },
+            { nazwa: "Ryba dnia", en: "Fish of the day", nazwaCz: "Ryba denní nabídka", skladniki: [], cena: "od 49 zł", cenaEn: "from 49 zł" },
           ],
         },
         {
           id: "wege",
           kategoria: "Dania wegetariańskie",
+          kategoriaEn: "Vegetarian",
           dania: [
-            { nazwa: "Ser panierowany", nazwaCz: "Smažený sýr s hranolky a tatarkou", skladniki: ["frytki", "sos tatarski"], cena: "39 zł", wege: true, zdjecie: "./assets/img/zdjecie-16.jpg" },
-            { nazwa: "Ser Hermelín panierowany", nazwaCz: "Smažený Hermelín / ostružinová omáčka s tymiánem", skladniki: ["sos z jeżyn z tymiankiem"], cena: "36 zł", wege: true },
-            { nazwa: "Placki ziemniaczane", nazwaCz: "Bramboráky", skladniki: ["kwaśna śmietana", "cukier"], cena: "29 zł", wege: true, zdjecie: "./assets/img/zdjecie-27.jpg" },
-            { nazwa: "Pierogi ze szpinakiem i serem feta", nazwaCz: "Knedlíky se špenátem a feta sýrem s cibulkou", skladniki: ["okraszone cebulką"], cena: "45 zł", wege: true, zdjecie: "./assets/img/zdjecie-12.jpg" },
-            { nazwa: "Pierogi z wędzonym serem owczym", nazwaCz: "Knedlíky s uzeným ovčím sýrem / brusinky / červená kapusta", skladniki: ["żurawina", "modra kapusta"], cena: "45 zł", wege: true },
+            { nazwa: "Ser panierowany", en: "Fried breaded cheese", nazwaCz: "Smažený sýr s hranolky a tatarkou", skladniki: ["frytki", "sos tatarski"], skladnikiEn: ["fries", "tartar sauce"], cena: "39 zł", wege: true, zdjecie: "./assets/img/zdjecie-16.jpg" },
+            { nazwa: "Ser Hermelín panierowany", en: "Fried breaded Hermelín cheese", nazwaCz: "Smažený Hermelín / ostružinová omáčka s tymiánem", skladniki: ["sos z jeżyn z tymiankiem"], skladnikiEn: ["blackberry and thyme sauce"], cena: "36 zł", wege: true },
+            { nazwa: "Placki ziemniaczane", en: "Potato pancakes", nazwaCz: "Bramboráky", skladniki: ["kwaśna śmietana", "cukier"], skladnikiEn: ["sour cream", "sugar"], cena: "29 zł", wege: true, zdjecie: "./assets/img/zdjecie-27.jpg" },
+            { nazwa: "Pierogi ze szpinakiem i serem feta", en: "Dumplings (pierogi) with spinach and feta", nazwaCz: "Knedlíky se špenátem a feta sýrem s cibulkou", skladniki: ["okraszone cebulką"], skladnikiEn: ["topped with fried onion"], cena: "45 zł", wege: true, zdjecie: "./assets/img/zdjecie-12.jpg" },
+            { nazwa: "Pierogi z wędzonym serem owczym", en: "Dumplings (pierogi) with smoked sheep's cheese", nazwaCz: "Knedlíky s uzeným ovčím sýrem / brusinky / červená kapusta", skladniki: ["żurawina", "modra kapusta"], skladnikiEn: ["cranberries", "red cabbage"], cena: "45 zł", wege: true },
           ],
         },
         {
           id: "salatki",
           kategoria: "Sałatki",
+          kategoriaEn: "Salads",
           dania: [
-            { nazwa: "Sałatka z piersią kaczą", nazwaCz: "Salát z kachních prsou / mango / hruška / sezam / malinovo-zázvorová omáčka", skladniki: ["sałaty", "mango", "gruszka", "sezam", "sos malinowo-imbirowy"], cena: "49 zł" },
-            { nazwa: "Sałatka z kurczakiem", nazwaCz: "Salát s grilovaným kuřecím masem / okurka / rajče / sýr / dressing", skladniki: ["sałaty", "chrupiący filet z kurczaka", "awokado", "owoce", "dressing miodowo-makowy"], cena: "46 zł" },
-            { nazwa: "Sałatka z kozim serem", nazwaCz: "Salát s kozím sýrem / hruška / pražené ořechy / pomerančová omáčka", skladniki: ["sałaty", "grillowany ser kozi", "gruszka", "prażone orzechy", "sos pomarańczowy"], cena: "49 zł", wege: true },
+            { nazwa: "Sałatka z piersią kaczą", en: "Duck breast salad", nazwaCz: "Salát z kachních prsou / mango / hruška / sezam / malinovo-zázvorová omáčka", skladniki: ["sałaty", "mango", "gruszka", "sezam", "sos malinowo-imbirowy"], skladnikiEn: ["salad leaves", "mango", "pear", "sesame", "raspberry and ginger sauce"], cena: "49 zł" },
+            { nazwa: "Sałatka z kurczakiem", en: "Chicken salad", nazwaCz: "Salát s grilovaným kuřecím masem / okurka / rajče / sýr / dressing", skladniki: ["sałaty", "chrupiący filet z kurczaka", "awokado", "owoce", "dressing miodowo-makowy"], skladnikiEn: ["salad leaves", "crispy chicken fillet", "avocado", "fruit", "honey and poppy seed dressing"], cena: "46 zł" },
+            { nazwa: "Sałatka z kozim serem", en: "Goat cheese salad", nazwaCz: "Salát s kozím sýrem / hruška / pražené ořechy / pomerančová omáčka", skladniki: ["sałaty", "grillowany ser kozi", "gruszka", "prażone orzechy", "sos pomarańczowy"], skladnikiEn: ["salad leaves", "grilled goat cheese", "pear", "roasted nuts", "orange sauce"], cena: "49 zł", wege: true },
           ],
         },
         {
           id: "dodatki",
           kategoria: "Dodatki",
+          kategoriaEn: "Sides",
           dania: [
-            { nazwa: "Knedliki", nazwaCz: "Houskové knedlíky", skladniki: [], cena: "12 zł" },
-            { nazwa: "Ziemniaki", nazwaCz: "Brambory (puree, vařené, opékané)", skladniki: [], uwagi: "Purée, gotowane lub smażone.", cena: "12 zł" },
-            { nazwa: "Frytki", nazwaCz: "Hranolky", skladniki: [], cena: "12 zł" },
-            { nazwa: "Pieczone warzywa korzeniowe", nazwaCz: "Pečená kořenová zelenina", skladniki: [], cena: "15 zł" },
-            { nazwa: "Bukiet surówek", nazwaCz: "Míchané saláty", skladniki: [], cena: "15 zł" },
-            { nazwa: "Sałaty z sosem winegret", nazwaCz: "Saláty s vinaigrettovou omáčkou", skladniki: [], cena: "15 zł" },
-            { nazwa: "Morawska kapusta zasmażana", nazwaCz: "Moravské smažené zelí", skladniki: [], cena: "15 zł" },
-            { nazwa: "Czerwona kapusta z żurawiną", nazwaCz: "Červené zelí s brusinkami", skladniki: [], cena: "15 zł" },
+            { nazwa: "Knedliki", en: "Bread dumplings (knedlíky)", nazwaCz: "Houskové knedlíky", skladniki: [], cena: "12 zł" },
+            { nazwa: "Ziemniaki", en: "Potatoes", nazwaCz: "Brambory (puree, vařené, opékané)", skladniki: [], uwagi: "Purée, gotowane lub smażone.", uwagiEn: "Mashed, boiled or fried.", cena: "12 zł" },
+            { nazwa: "Frytki", en: "Fries", nazwaCz: "Hranolky", skladniki: [], cena: "12 zł" },
+            { nazwa: "Pieczone warzywa korzeniowe", en: "Roasted root vegetables", nazwaCz: "Pečená kořenová zelenina", skladniki: [], cena: "15 zł" },
+            { nazwa: "Bukiet surówek", en: "Mixed salads", nazwaCz: "Míchané saláty", skladniki: [], cena: "15 zł" },
+            { nazwa: "Sałaty z sosem winegret", en: "Salad leaves with vinaigrette", nazwaCz: "Saláty s vinaigrettovou omáčkou", skladniki: [], cena: "15 zł" },
+            { nazwa: "Morawska kapusta zasmażana", en: "Moravian fried cabbage", nazwaCz: "Moravské smažené zelí", skladniki: [], cena: "15 zł" },
+            { nazwa: "Czerwona kapusta z żurawiną", en: "Red cabbage with cranberries", nazwaCz: "Červené zelí s brusinkami", skladniki: [], cena: "15 zł" },
           ],
         },
         {
           id: "desery",
           kategoria: "Desery",
+          kategoriaEn: "Desserts",
           dania: [
-            { nazwa: "Marlenka", nazwaCz: "Marlenka", skladniki: ["czeski torcik miodowy"], uwagi: "Także w wersji bezglutenowej.", cena: "27 zł", zdjecie: "./assets/img/zdjecie-11.jpg" },
-            { nazwa: "Sernik pieczony w niskiej temperaturze", nazwaCz: "Tvarohový koláč / jahodová pěna", skladniki: ["mus truskawkowy"], cena: "28 zł", zdjecie: "./assets/img/zdjecie-17.jpg" },
-            { nazwa: "Deser lodowy", nazwaCz: "Zmrzlinový dezert / ovoce / pusinky / šlehačka / malinová omáčka", skladniki: ["owoce", "bezy", "bita śmietana", "sos malinowy"], cena: "29 zł", zdjecie: "./assets/img/zdjecie-05.jpg" },
+            { nazwa: "Marlenka", en: "Marlenka", nazwaCz: "Marlenka", skladniki: ["czeski torcik miodowy"], skladnikiEn: ["Czech honey cake"], uwagi: "Także w wersji bezglutenowej.", uwagiEn: "Also available gluten-free.", cena: "27 zł", zdjecie: "./assets/img/zdjecie-11.jpg" },
+            { nazwa: "Sernik pieczony w niskiej temperaturze", en: "Slow-baked cheesecake", nazwaCz: "Tvarohový koláč / jahodová pěna", skladniki: ["mus truskawkowy"], skladnikiEn: ["strawberry mousse"], cena: "28 zł", zdjecie: "./assets/img/zdjecie-17.jpg" },
+            { nazwa: "Deser lodowy", en: "Ice cream dessert", nazwaCz: "Zmrzlinový dezert / ovoce / pusinky / šlehačka / malinová omáčka", skladniki: ["owoce", "bezy", "bita śmietana", "sos malinowy"], skladnikiEn: ["fruit", "meringues", "whipped cream", "raspberry sauce"], cena: "29 zł", zdjecie: "./assets/img/zdjecie-05.jpg" },
           ],
         },
       ];
 
-      (function renderMenu() {
+      // KARTA NAPOJÓW — te same pola co w karcie dań (nazwa, en, skladniki,
+      // uwagi, cena). Kategoria może mieć uwagi pokazywane nad pozycjami.
+      // { naglowek, naglowekEn } dzieli kategorię na grupy (np. Bezalkoholowe).
+      // Ceny wpisane tak jak w karcie lokalu (NAPOJE.docx).
+      const NAPOJE = [
+        {
+          id: "napoje-sezonowe",
+          kategoria: "Napoje sezonowe",
+          kategoriaEn: "Seasonal drinks",
+          dania: [
+            { naglowek: "Na ciepło", naglowekEn: "Hot" },
+            { nazwa: "Herbata malinowa z rozmarynem", en: "Raspberry tea with rosemary", skladniki: ["czarna herbata", "puree z malin", "syrop Spiced Red Berries", "owoce leśne", "cytryna", "rozmaryn"], skladnikiEn: ["black tea", "raspberry purée", "Spiced Red Berries syrup", "forest berries", "lemon", "rosemary"], uwagi: "400 ml.", uwagiEn: "400 ml.", cena: "32 zł" },
+            { nazwa: "Gorąca lemoniada gruszkowa", en: "Hot pear lemonade", skladniki: ["syrop gruszkowy", "gruszka", "sok z cytryny", "miód", "przyprawa korzenna", "cynamon"], skladnikiEn: ["pear syrup", "pear", "lemon juice", "honey", "mixed spice", "cinnamon"], uwagi: "400 ml.", uwagiEn: "400 ml.", cena: "29 zł" },
+            { nazwa: "Gorąca lemoniada szarlotka", en: "Hot apple pie lemonade", skladniki: ["sok jabłkowy", "syrop Apple Pie", "jabłko", "cynamon", "goździki"], skladnikiEn: ["apple juice", "Apple Pie syrup", "apple", "cinnamon", "cloves"], uwagi: "400 ml.", uwagiEn: "400 ml.", cena: "29 zł" },
+            { nazwa: "Grzaniec bezalkoholowy z czerwonego wina", en: "Alcohol-free red mulled wine", skladniki: ["wino czerwone bezalkoholowe", "puree z malin", "syrop Spiced Red Berries", "miód", "pomarańcza", "goździki", "przyprawa korzenna"], skladnikiEn: ["alcohol-free red wine", "raspberry purée", "Spiced Red Berries syrup", "honey", "orange", "cloves", "mixed spice"], uwagi: "250 ml.", uwagiEn: "250 ml.", cena: "32 zł" },
+            { nazwa: "Grzaniec bezalkoholowy z białego wina", en: "Alcohol-free white mulled wine", skladniki: ["wino białe bezalkoholowe", "puree z gruszki", "syrop gruszkowy", "przyprawa korzenna", "gruszka", "goździki", "cynamon"], skladnikiEn: ["alcohol-free white wine", "pear purée", "pear syrup", "mixed spice", "pear", "cloves", "cinnamon"], uwagi: "250 ml.", uwagiEn: "250 ml.", cena: "32 zł" },
+            { nazwa: "Caffè latte piernikowo-dyniowe", en: "Gingerbread and pumpkin caffè latte", skladniki: ["syrop Gingerbread & Pumpkin Spice", "mleko", "espresso", "przyprawa korzenna"], skladnikiEn: ["Gingerbread & Pumpkin Spice syrup", "milk", "espresso", "mixed spice"], uwagi: "250 ml.", uwagiEn: "250 ml.", cena: "28 zł" },
+            { nazwa: "Rozgrzewający napój bogów", en: "Warming drink of the gods", skladniki: ["jasne piwo", "miód", "przyprawa korzenna", "goździki", "pomarańcza"], skladnikiEn: ["pale beer", "honey", "mixed spice", "cloves", "orange"], uwagi: "400 ml.", uwagiEn: "400 ml.", cena: "26 zł" },
+            { naglowek: "Bezalkoholowe", naglowekEn: "Alcohol-free" },
+            { nazwa: "Aperol Virgin", en: "Aperol Virgin", skladniki: ["syrop Orange Spritz", "Prosecco 0%", "lód", "plastry pomarańczy"], skladnikiEn: ["Orange Spritz syrup", "0% Prosecco", "ice", "orange slices"], uwagi: "380 ml.", uwagiEn: "380 ml.", cena: "36 zł" },
+            { nazwa: "Mojito Mint Virgin", en: "Mojito Mint Virgin", skladniki: ["syrop Mojito Mint", "woda gazowana", "mięta", "limonka"], skladnikiEn: ["Mojito Mint syrup", "sparkling water", "mint", "lime"], uwagi: "380 ml.", uwagiEn: "380 ml.", cena: "36 zł" },
+            { nazwa: "Espresso Tonic", en: "Espresso Tonic", skladniki: ["kawa espresso", "Kinley Tonic", "Grenadina", "lód", "limonka"], skladnikiEn: ["espresso", "Kinley Tonic", "grenadine", "ice", "lime"], uwagi: "200 ml.", uwagiEn: "200 ml.", cena: "22 zł" },
+            { naglowek: "Alkoholowe", naglowekEn: "With alcohol" },
+            { nazwa: "Prosecco Paradise", en: "Prosecco Paradise", skladniki: ["Malibu", "Prosecco", "syrop mango-marakuja", "sok z limonki"], skladnikiEn: ["Malibu", "Prosecco", "mango and passion fruit syrup", "lime juice"], cena: "39 zł" },
+            { nazwa: "Butterfly Rum", en: "Butterfly Rum", skladniki: ["rum", "syrop i sok z grejpfruta", "napar z kwiatów klitorii", "limonka"], skladnikiEn: ["rum", "grapefruit syrup and juice", "butterfly pea flower infusion", "lime"], cena: "41 zł" },
+            { nazwa: "Hot Plum", en: "Hot Plum", skladniki: ["Soplica śliwkowa", "sok jabłkowy", "śliwka suszona", "jabłko"], skladnikiEn: ["Soplica plum vodka", "apple juice", "dried plum", "apple"], cena: "33 zł" },
+          ],
+        },
+        {
+          id: "piwo",
+          kategoria: "Piwo – Černá Hora",
+          kategoriaEn: "Beer – Černá Hora",
+          uwagi: "Ceny za 0,3 l / 0,5 l / 1 l.",
+          uwagiEn: "Prices for 0.3 l / 0.5 l / 1 l.",
+          dania: [
+            { nazwa: "Ležák", en: "Ležák", skladniki: ["pils"], skladnikiEn: ["pilsner"], cena: "16 / 20 / 33 zł" },
+            { nazwa: "Pšeničné", en: "Pšeničné", skladniki: ["niefiltrowane"], skladnikiEn: ["unfiltered wheat beer"], cena: "16 / 20 / 33 zł" },
+            { nazwa: "Tmavé (Granát)", en: "Tmavé (Granát)", skladniki: ["ciemne"], skladnikiEn: ["dark"], cena: "16 / 20 / 33 zł" },
+            { nazwa: "Medový ležák", en: "Medový ležák", skladniki: ["lager"], skladnikiEn: ["honey lager"], cena: "16 / 20 / 33 zł" },
+            { nazwa: "IPA 14 Flying Cloud", en: "IPA 14 Flying Cloud", skladniki: [], cena: "16 / 20 / 33 zł" },
+            { nazwa: "Řezané pivo", en: "Řezané pivo", skladniki: [], uwagi: "Medový ležák i Granát pół na pół.", uwagiEn: "Half Medový ležák, half Granát.", cena: "21 / 25 / 39 zł" },
+            { nazwa: "Zestaw degustacyjny", en: "Tasting set", skladniki: [], uwagi: "5 × 150 ml.", uwagiEn: "5 × 150 ml.", cena: "30 zł" },
+            { nazwa: "Piwo butelkowe", en: "Bottled beer", skladniki: [], uwagi: "Również w wersji bezalkoholowej – o dostępność zapytaj obsługę.", uwagiEn: "Also alcohol-free – ask our staff about availability.", cena: "od 20 zł", cenaEn: "from 20 zł" },
+          ],
+        },
+        {
+          id: "cieple",
+          kategoria: "Napoje ciepłe",
+          kategoriaEn: "Hot drinks",
+          dania: [
+            { nazwa: "Herbata", en: "Tea", skladniki: [], cena: "12 zł" },
+            { nazwa: "Herbata z rumem", en: "Tea with rum", skladniki: [], cena: "27 zł" },
+            { nazwa: "Kawa espresso", en: "Espresso", skladniki: [], cena: "13 zł" },
+            { nazwa: "Espresso macchiato", en: "Espresso macchiato", skladniki: [], cena: "16 zł" },
+            { nazwa: "Espresso doppio", en: "Espresso doppio", skladniki: [], cena: "16 zł" },
+            { nazwa: "Americano", en: "Americano", skladniki: [], cena: "14 zł" },
+            { nazwa: "Americano z mlekiem", en: "Americano with milk", skladniki: [], cena: "16 zł" },
+            { nazwa: "Cappuccino", en: "Cappuccino", skladniki: [], cena: "18 zł" },
+            { nazwa: "Latte", en: "Latte", skladniki: [], cena: "20 zł" },
+            { nazwa: "Latte macchiato z syropem", en: "Latte macchiato with syrup", skladniki: [], cena: "24 zł" },
+            { nazwa: "Ice coffee z lodami i syropem waniliowym", en: "Iced coffee with ice cream and vanilla syrup", skladniki: [], cena: "32 zł" },
+            { nazwa: "Irish coffee", en: "Irish coffee", skladniki: [], cena: "32 zł" },
+            { nazwa: "Wino grzane", en: "Mulled wine", skladniki: ["goździki", "pomarańcza"], skladnikiEn: ["cloves", "orange"], cena: "25 zł" },
+          ],
+        },
+        {
+          id: "zimne",
+          kategoria: "Napoje zimne",
+          kategoriaEn: "Cold drinks",
+          dania: [
+            { nazwa: "Kofola", en: "Kofola", skladniki: [], uwagi: "0,5 l / 1 l.", uwagiEn: "0.5 l / 1 l.", cena: "17 / 29 zł" },
+            { nazwa: "Almdudler – lemoniada", en: "Almdudler lemonade", skladniki: [], uwagi: "0,33 l.", uwagiEn: "0.33 l.", cena: "26 zł" },
+            { nazwa: "Coca-Cola, Tonic Kinley, Fanta, Sprite", en: "Coca-Cola, Kinley Tonic, Fanta, Sprite", skladniki: [], uwagi: "0,25 l.", uwagiEn: "0.25 l.", cena: "12 zł" },
+            { nazwa: "Kropla Beskidu – woda mineralna", en: "Kropla Beskidu mineral water", skladniki: [], uwagi: "0,33 l.", uwagiEn: "0.33 l.", cena: "12 zł" },
+            { nazwa: "Dzbanek wody z miętą i cytrusami", en: "Jug of water with mint and citrus", skladniki: [], uwagi: "1 l.", uwagiEn: "1 l.", cena: "19 zł" },
+            { nazwa: "Sok ze świeżych owoców", en: "Fresh fruit juice", skladniki: [], uwagi: "0,3 l.", uwagiEn: "0.3 l.", cena: "29 zł" },
+            { nazwa: "Sok Cappy", en: "Cappy juice", skladniki: [], uwagi: "0,25 l.", uwagiEn: "0.25 l.", cena: "12 zł" },
+            { nazwa: "Dzbanek soku", en: "Jug of juice", skladniki: [], uwagi: "1 l.", uwagiEn: "1 l.", cena: "34 zł" },
+          ],
+        },
+        {
+          id: "wodki",
+          kategoria: "Wódki",
+          kategoriaEn: "Vodka and spirits",
+          uwagi: "Ceny za kieliszek / butelkę.",
+          uwagiEn: "Prices per glass / bottle.",
+          dania: [
+            { nazwa: "Czechoslovakia", en: "Czechoslovakia", skladniki: [], cena: "18 / 220 zł" },
+            { nazwa: "Becherovka", en: "Becherovka", skladniki: [], cena: "21 / 220 zł" },
+            { nazwa: "Gruszkówka", en: "Pear brandy (Hruškovice)", skladniki: [], cena: "23 / 225 zł" },
+            { nazwa: "Śliwowica", en: "Plum brandy (Slivovice)", skladniki: [], cena: "23 / 225 zł" },
+            { nazwa: "Śliwowica Kosher 50%", en: "Kosher plum brandy 50%", skladniki: [], cena: "31 / 320 zł" },
+            { nazwa: "Absynt 80%", en: "Absinthe 80%", skladniki: [], cena: "27 zł" },
+            { nazwa: "Wyborowa", en: "Wyborowa", skladniki: [], uwagi: "Kieliszek / 0,5 l / butelka.", uwagiEn: "Glass / 0.5 l / bottle.", cena: "14 / 95 / 139 zł" },
+            { nazwa: "Finlandia", en: "Finlandia", skladniki: [], uwagi: "Kieliszek / 0,5 l / butelka.", uwagiEn: "Glass / 0.5 l / bottle.", cena: "16 / 150 / 198 zł" },
+            { nazwa: "Ostoja", en: "Ostoja", skladniki: [], uwagi: "Kieliszek / 0,5 l / butelka.", uwagiEn: "Glass / 0.5 l / bottle.", cena: "17 / 150 / 198 zł" },
+            { nazwa: "Żubrówka Bison Grass", en: "Żubrówka Bison Grass", skladniki: [], cena: "14 / 139 zł" },
+            { nazwa: "Jägermeister", en: "Jägermeister", skladniki: [], cena: "19 / 210 zł" },
+          ],
+        },
+        {
+          id: "whisky",
+          kategoria: "Whisky, brandy, bourbon, gin, tequila",
+          kategoriaEn: "Whisky, brandy, bourbon, gin, tequila",
+          uwagi: "Ceny za kieliszek / butelkę.",
+          uwagiEn: "Prices per glass / bottle.",
+          dania: [
+            { nazwa: "Jameson", en: "Jameson", skladniki: [], cena: "22 / 250 zł" },
+            { nazwa: "Auchentoshan 12 YO", en: "Auchentoshan 12 YO", skladniki: [], cena: "36 zł" },
+            { nazwa: "Glenfiddich 15 YO", en: "Glenfiddich 15 YO", skladniki: [], cena: "42 zł" },
+            { nazwa: "Ballantine’s Finest", en: "Ballantine’s Finest", skladniki: [], cena: "27 / 220 zł" },
+            { nazwa: "Jack Daniel’s", en: "Jack Daniel’s", skladniki: [], cena: "25 / 280 zł" },
+            { nazwa: "Metaxa 7*", en: "Metaxa 7*", skladniki: [], cena: "25 zł" },
+            { nazwa: "Gin Beefeater", en: "Beefeater Gin", skladniki: [], cena: "18 zł" },
+            { nazwa: "Rum Bacardi", en: "Bacardi Rum", skladniki: [], cena: "18 zł" },
+            { nazwa: "Rum Dictador 12 YO", en: "Dictador 12 YO Rum", skladniki: [], cena: "26 zł" },
+            { nazwa: "Tequila", en: "Tequila", skladniki: [], cena: "24 zł" },
+          ],
+        },
+        {
+          id: "drinki",
+          kategoria: "Drinki",
+          kategoriaEn: "Cocktails",
+          dania: [
+            { nazwa: "Zurivy Čech", en: "Zurivy Čech", skladniki: [], cena: "24 zł" },
+            { nazwa: "Aperol Spritz", en: "Aperol Spritz", skladniki: [], cena: "42 zł" },
+            { nazwa: "Szprycer", en: "Spritzer", skladniki: [], cena: "35 zł" },
+            { nazwa: "Hugo Spritz by „Český Film”", en: "Hugo Spritz by „Český Film”", skladniki: [], cena: "42 zł" },
+            { nazwa: "Ogórek Bison Grass", en: "Bison Grass Cucumber", skladniki: [], cena: "34 zł" },
+            { nazwa: "Cuba Libre", en: "Cuba Libre", skladniki: [], cena: "39 zł" },
+            { nazwa: "Gin & Tonik by „Český Film”", en: "Gin & Tonic by „Český Film”", skladniki: [], cena: "36 zł" },
+            { nazwa: "Campari Orange", en: "Campari Orange", skladniki: [], cena: "36 zł" },
+          ],
+        },
+      ];
+
+      const UI_TEXT = {
+        pl: { wege: "Wege", ostre: "Ostre", wegeLabel: "Danie wegetariańskie", ostreLabel: "Danie ostre", photo: "Pokaż zdjęcie" },
+        en: { wege: "Vegetarian", ostre: "Spicy", wegeLabel: "Vegetarian dish", ostreLabel: "Spicy dish", photo: "Show photo" },
+      };
+
+      const tabClassActive =
+        "menu-tab shrink-0 border-b-4 border-copper px-4 py-4 text-sm font-bold uppercase tracking-[0.18em] text-brass transition-colors duration-300";
+      const tabClassIdle =
+        "menu-tab shrink-0 border-b-4 border-transparent px-4 py-4 text-sm font-bold uppercase tracking-[0.18em] text-[#A0A0A0] transition-colors duration-300 hover:text-brass";
+
+      // Karty z przełącznikiem PL / EN; aktywna zakładka zostaje przy zmianie języka
+      const CARDS = [
+        { data: MENU, tabs: "menuTabs", panels: "menuPanels", prefix: "panel-", active: MENU[0].id },
+        { data: NAPOJE, tabs: "drinkTabs", panels: "drinkPanels", prefix: "napoje-", active: NAPOJE[0].id },
+      ];
+
+      function renderCards(lang) {
+        const en = lang === "en";
+        const t = UI_TEXT[lang];
         const escapeHtml = (text) =>
           String(text).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
-
-        const tabClassActive =
-          "menu-tab shrink-0 border-b-4 border-copper px-4 py-4 text-sm font-bold uppercase tracking-[0.18em] text-brass transition-colors duration-300";
-        const tabClassIdle =
-          "menu-tab shrink-0 border-b-4 border-transparent px-4 py-4 text-sm font-bold uppercase tracking-[0.18em] text-[#A0A0A0] transition-colors duration-300 hover:text-brass";
+        const pick = (item, field) => (en && item[field + "En"] !== undefined ? item[field + "En"] : item[field]);
+        const nameOf = (dish) => (en && dish.en ? dish.en : dish.nazwa);
 
         function icon(name, label, colorClass) {
           return `
@@ -1230,10 +1413,10 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
         }
 
         function photo(dish) {
-          const name = escapeHtml(dish.nazwa);
+          const name = escapeHtml(nameOf(dish));
           return `
                     <span class="dish-photo">
-                      <button type="button" class="dish-photo-button" aria-label="Pokaż zdjęcie: ${name}">
+                      <button type="button" class="dish-photo-button" aria-label="${t.photo}: ${name}">
                         <svg fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                           <use href="#icon-camera"></use>
                         </svg>
@@ -1246,57 +1429,83 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
 
         function description(dish) {
           const parts = [];
-          if (dish.skladniki && dish.skladniki.length) {
-            const text = dish.skladniki.join(", ");
+          const ingredients = pick(dish, "skladniki");
+          if (ingredients && ingredients.length) {
+            const text = ingredients.join(", ");
             parts.push(text.charAt(0).toUpperCase() + text.slice(1) + ".");
           }
-          if (dish.uwagi) parts.push(dish.uwagi);
+          const notes = pick(dish, "uwagi");
+          if (notes) parts.push(notes);
           return parts.length ? `<p class="mt-2 text-sm leading-6 text-[#A0A0A0]">${escapeHtml(parts.join(" "))}</p>` : "";
         }
 
         function dishHtml(dish) {
+          if (dish.naglowek) {
+            return `
+              <h3 class="border-b border-[#333333] pb-2 pt-4 text-xs font-bold uppercase tracking-[0.24em] text-[#A0A0A0] md:col-span-2">${escapeHtml(pick(dish, "naglowek"))}</h3>`;
+          }
           const hasIcons = dish.wege || dish.ostre;
+          const name = escapeHtml(nameOf(dish));
+          const course = pick(dish, "rodzaj");
           const title = hasIcons
             ? `<h3 class="flex flex-wrap items-center gap-2 text-lg font-bold text-pearl">
-                    <span>${escapeHtml(dish.nazwa)}</span>${dish.wege ? icon("leaf", "Danie wegetariańskie", "text-brass") : ""}${
-                dish.ostre ? icon("chili", "Danie ostre", "text-[#9E3D2A]") : ""
+                    <span>${name}</span>${dish.wege ? icon("leaf", t.wegeLabel, "text-brass") : ""}${
+                dish.ostre ? icon("chili", t.ostreLabel, "text-[#9E3D2A]") : ""
               }${dish.zdjecie ? photo(dish) : ""}
                   </h3>`
             : `<h3 class="text-lg font-bold text-pearl">
-                    ${escapeHtml(dish.nazwa)}${dish.zdjecie ? photo(dish) : ""}
+                    ${name}${dish.zdjecie ? photo(dish) : ""}
                   </h3>`;
           return `
               <article>
+                ${course ? `<p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#A0A0A0]">${escapeHtml(course)}</p>` : ""}
                 <div class="flex items-end gap-3">
                   ${title}
                   <span class="mb-1 flex-grow border-b border-dotted border-gray-600"></span>
-                  <p class="shrink-0 text-lg font-bold text-copper">${escapeHtml(dish.cena)}</p>
+                  <p class="shrink-0 text-lg font-bold text-copper">${escapeHtml(pick(dish, "cena"))}</p>
                 </div>
                 ${description(dish)}
               </article>`;
         }
 
-        document.getElementById("menuTabs").innerHTML = MENU.map(
-          (category, index) => `
+        CARDS.forEach((card) => {
+          document.getElementById(card.tabs).innerHTML = card.data
+            .map(
+              (category) => `
             <button
-              class="${index === 0 ? tabClassActive : tabClassIdle}"
+              class="${category.id === card.active ? tabClassActive : tabClassIdle}"
               type="button"
               data-target="${category.id}"
               role="tab"
-              aria-selected="${index === 0}"
-              aria-controls="panel-${category.id}"
+              aria-selected="${category.id === card.active}"
+              aria-controls="${card.prefix}${category.id}"
             >
-              ${escapeHtml(category.kategoria)}
+              ${escapeHtml(pick(category, "kategoria"))}
             </button>`
-        ).join("");
+            )
+            .join("");
 
-        document.getElementById("menuPanels").innerHTML = MENU.map(
-          (category, index) => `
-            <div id="panel-${category.id}" class="tab-panel ${index === 0 ? "grid" : "hidden"} grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2" data-panel="${category.id}" role="tabpanel">
+          document.getElementById(card.panels).innerHTML = card.data
+            .map((category) => {
+              const note = pick(category, "uwagi");
+              return `
+            <div id="${card.prefix}${category.id}" class="tab-panel ${category.id === card.active ? "grid" : "hidden"} grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2" data-panel="${category.id}" role="tabpanel">
+              ${note ? `<p class="text-sm text-[#A0A0A0] md:col-span-2">${escapeHtml(note)}</p>` : ""}
               ${category.dania.map(dishHtml).join("")}
-            </div>`
-        ).join("");
-      })();
+            </div>`;
+            })
+            .join("");
+        });
+
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          el.textContent = t[el.dataset.i18n];
+        });
+        document.querySelectorAll(".lang-btn").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.lang === lang));
+        });
+      }
+
+      renderCards("pl");
     </script>
 
     <script>
@@ -1304,9 +1513,6 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
       const menuButton = document.getElementById("menuButton");
       const mobileMenu = document.getElementById("mobileMenu");
       const mobileLinks = mobileMenu.querySelectorAll("a");
-      const menuTabs = document.querySelectorAll(".menu-tab");
-      const tabPanels = document.querySelectorAll(".tab-panel");
-      const dishPhotos = document.querySelectorAll(".dish-photo");
 
       function updateNavbar() {
         navbar.classList.toggle("nav-scrolled", window.scrollY > 24);
@@ -1338,8 +1544,11 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
 
       function activateTab(tab) {
         const target = tab.dataset.target;
+        const card = CARDS.find((item) => item.tabs === tab.parentElement.id);
+        const tabPanels = document.getElementById(card.panels).querySelectorAll(".tab-panel");
+        card.active = target;
 
-        menuTabs.forEach((button) => {
+        tab.parentElement.querySelectorAll(".menu-tab").forEach((button) => {
           button.classList.remove("border-copper", "text-brass");
           button.classList.add("border-transparent", "text-[#A0A0A0]");
           button.setAttribute("aria-selected", "false");
@@ -1363,7 +1572,7 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
       }
 
       function closeDishPhotos() {
-        dishPhotos.forEach((photo) => {
+        document.querySelectorAll(".dish-photo").forEach((photo) => {
           photo.classList.remove("is-open");
           photo.querySelector(".dish-photo-button").blur();
         });
@@ -1417,23 +1626,24 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
         link.addEventListener("click", closeMobileMenu);
       });
 
-      menuTabs.forEach((tab) => {
-        tab.addEventListener("click", () => activateTab(tab));
-      });
+      // Zakładki i zdjęcia dań są generowane na nowo przy zmianie języka,
+      // dlatego kliknięcia obsługuje jeden nasłuchiwacz na dokumencie.
+      document.addEventListener("click", (event) => {
+        const tab = event.target.closest(".menu-tab");
+        if (tab) activateTab(tab);
 
-      dishPhotos.forEach((photo) => {
-        const button = photo.querySelector(".dish-photo-button");
+        const langButton = event.target.closest(".lang-btn");
+        if (langButton) renderCards(langButton.dataset.lang);
 
-        button.addEventListener("click", (event) => {
-          event.stopPropagation();
+        const photoButton = event.target.closest(".dish-photo-button");
+        if (photoButton) {
+          const photo = photoButton.closest(".dish-photo");
           const isOpen = photo.classList.contains("is-open");
-
           closeDishPhotos();
           photo.classList.toggle("is-open", !isOpen);
-        });
-      });
+          return;
+        }
 
-      document.addEventListener("click", () => {
         closeDishPhotos();
       });
 
