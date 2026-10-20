@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#aa8e59" />
+    <meta name="theme-color" content="#e7bc74" />
     <script>if (!/\/$/.test(location.pathname) && !/\.html?$/.test(location.pathname)) location.replace(location.pathname + '/' + location.search + location.hash);</script>
     <meta
       name="description"
@@ -277,9 +277,9 @@
         }
       }
 
-      /* Złote tło strony (kolor dawnego przerywnika) i ciemny tekst */
+      /* Złote tło strony rgb(231, 188, 116) i ciemny tekst */
       body {
-        background: #aa8e59;
+        background: #e7bc74;
         color: #121212;
       }
 
@@ -305,7 +305,7 @@
       }
 
       .nav-scrolled {
-        background: rgba(170, 142, 89, 0.94);
+        background: rgba(231, 188, 116, 0.94);
         border-bottom-color: rgba(18, 18, 18, 0.25);
       }
 
@@ -342,30 +342,136 @@
 
       /* Przerywnik sekcji: stara klisza filmowa z perforacją */
       .film-divider {
-        position: relative;
-        height: 46px;
-        background:
-          linear-gradient(90deg, transparent 0 17%, rgba(255, 240, 210, 0.07) 17% 17.15%, transparent 17.15% 61%, rgba(255, 240, 210, 0.05) 61% 61.1%, transparent 61.1%),
-          repeating-linear-gradient(90deg, transparent 0 170px, rgba(170, 142, 89, 0.22) 170px 172px) center / 100% 20px no-repeat,
-          linear-gradient(180deg, #1d1813 0%, #120f0c 50%, #1d1813 100%);
+        height: 80px;
+        background: url("./assets/img/klisza.svg") left center / auto 100% repeat-x;
+        filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
       }
 
-      .film-divider::before,
-      .film-divider::after {
-        content: "";
+      @media (max-width: 767px) {
+        .film-divider {
+          height: 60px;
+        }
+      }
+
+      .cerna-hora-znak {
+        filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.3));
+      }
+
+      /* Hero: zdjęcie lofty Scheiblera, przyciemnione, jasny tekst */
+      .hero-photo {
         position: absolute;
-        left: 0;
-        right: 0;
-        height: 8px;
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='8'%3E%3Crect x='5' width='12' height='8' rx='2' fill='%23aa8e59'/%3E%3C/svg%3E") repeat-x;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(16, 12, 9, 0.66) 0%, rgba(16, 12, 9, 0.5) 45%, rgba(16, 12, 9, 0.8) 100%),
+          url("./assets/img/lofty.jpg") center 35% / cover;
       }
 
-      .film-divider::before {
-        top: 6px;
+      #hero > .relative.z-10 {
+        color: #f6efe3;
       }
 
-      .film-divider::after {
-        bottom: 6px;
+      #hero h2 {
+        color: #ebd3a3;
+      }
+
+      #hero a[href="#menu-glowne"] {
+        background: #f2e4cd;
+        color: #121212;
+      }
+
+      #hero a[href^="https://zjedz"] {
+        border-color: rgba(246, 239, 227, 0.75);
+        color: #f6efe3;
+      }
+
+      #hero a[href^="https://zjedz"]:hover {
+        background: #f6efe3;
+        color: #121212;
+      }
+
+      /* Navbar nad zdjęciem (na górze strony): jasny tekst i białe logo */
+      @media (min-width: 1024px) {
+        #navbar:not(.nav-scrolled) nav {
+          color: #f6efe3;
+        }
+
+        #navbar:not(.nav-scrolled) .nav-logo {
+          filter: invert(1);
+        }
+
+        #navbar:not(.nav-scrolled) .lang-btn {
+          color: rgba(246, 239, 227, 0.7);
+        }
+
+        #navbar:not(.nav-scrolled) .lang-btn[aria-pressed="true"] {
+          border-bottom-color: #f6efe3;
+          color: #f6efe3;
+        }
+
+        #navbar:not(.nav-scrolled) nav a[href^="https://zjedz"] {
+          border-color: rgba(246, 239, 227, 0.75);
+          color: #f6efe3;
+        }
+      }
+
+      /* Telefon i tablet: to samo, ale nie przy otwartym menu (złote tło) */
+      @media (max-width: 1023px) {
+        #navbar:not(.nav-scrolled):not(:has(#mobileMenu:not(.hidden))) nav {
+          color: #f6efe3;
+        }
+
+        #navbar:not(.nav-scrolled):not(:has(#mobileMenu:not(.hidden))) .nav-logo {
+          filter: invert(1);
+        }
+
+        #navbar:not(.nav-scrolled):not(:has(#mobileMenu:not(.hidden))) .lang-btn {
+          color: rgba(246, 239, 227, 0.7);
+        }
+
+        #navbar:not(.nav-scrolled):not(:has(#mobileMenu:not(.hidden))) .lang-btn[aria-pressed="true"] {
+          border-bottom-color: #f6efe3;
+          color: #f6efe3;
+        }
+
+        #navbar:not(.nav-scrolled):not(:has(#mobileMenu:not(.hidden))) nav a,
+        #navbar:not(.nav-scrolled):not(:has(#mobileMenu:not(.hidden))) #menuButton {
+          border-color: rgba(246, 239, 227, 0.75);
+          color: #f6efe3;
+        }
+      }
+
+      /* Navbar: większe logo, po przewinięciu mniejsze */
+      @media (min-width: 1024px) {
+        .nav-logo {
+          transition: height 400ms ease;
+        }
+
+        .nav-scrolled .nav-logo {
+          height: 4.5rem;
+        }
+      }
+
+      #navbar nav a,
+      .nav-links {
+        white-space: nowrap;
+      }
+
+      @media (min-width: 1024px) and (max-width: 1279px) {
+        .nav-links {
+          gap: 1.1rem !important;
+          font-size: 0.78rem !important;
+          letter-spacing: 0.12em !important;
+        }
+
+        .nav-links + div {
+          gap: 0.75rem !important;
+        }
+
+        .nav-links + div > a {
+          padding-left: 0.9rem !important;
+          padding-right: 0.9rem !important;
+          letter-spacing: 0.14em !important;
+        }
       }
 
       /* Telefon i tablet: nawigacja mobilna */
@@ -377,7 +483,7 @@
 
       @media (max-width: 1023px) {
         html {
-          scroll-padding-top: calc(72px + env(safe-area-inset-top));
+          scroll-padding-top: calc(80px + env(safe-area-inset-top));
         }
 
         .booking-float {
@@ -389,7 +495,7 @@
         }
 
         #mobileMenu {
-          background: rgba(170, 142, 89, 0.98);
+          background: rgba(231, 188, 116, 0.98);
         }
 
         /* Pasek pod paskiem statusu telefonu: nad navbarem nie prześwituje treść */
@@ -401,7 +507,7 @@
           z-index: 55;
           display: block;
           height: env(safe-area-inset-top);
-          background: #aa8e59;
+          background: #e7bc74;
         }
 
         #navbar {
@@ -579,6 +685,14 @@
         <path d="M16.7 2.4c1.2.2 2.2.8 2.9 1.8" />
         <path d="M15.4 5.2c2.8.6 4.5 2.8 4 5.5-.8 4.5-6.2 9.1-13.7 10.1-1.5.2-2.4-1.6-1.3-2.7 2.8-2.7 3.8-5.5 4.5-8.3.7-3 3.5-5.2 6.5-4.6Z" />
       </symbol>
+      <symbol id="icon-facebook" viewBox="0 0 24 24">
+        <path d="M13.6 21.5v-8.2h2.8l.4-3.3h-3.2V7.9c0-.9.3-1.6 1.6-1.6h1.7V3.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.4v3.3h2.8v8.2h3.4Z" />
+      </symbol>
+      <symbol id="icon-instagram" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8" />
+        <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.8" />
+        <circle cx="17.3" cy="6.7" r="1.15" />
+      </symbol>
       <symbol id="icon-camera" viewBox="0 0 24 24">
         <path d="M14.5 4 16 6.5h2.8a2.2 2.2 0 0 1 2.2 2.2v8.1a2.2 2.2 0 0 1-2.2 2.2H5.2A2.2 2.2 0 0 1 3 16.8V8.7a2.2 2.2 0 0 1 2.2-2.2H8L9.5 4h5Z" />
         <circle cx="12" cy="13" r="3.4" />
@@ -591,43 +705,61 @@
     >
       <nav
         class="mx-auto flex max-w-7xl items-center justify-between px-5 py-2 md:px-8"
-        aria-label="Główna nawigacja"
+        aria-label="Główna nawigacja" data-en-aria-label="Main navigation"
       >
         <a
           href="#hero"
           class="flex shrink-0 flex-col items-center leading-none text-pearl transition-colors duration-300 hover:text-brass"
-          aria-label="„Český Film” — strona główna"
+          aria-label="„Český Film” — strona główna" data-en-aria-label="“Český Film” — home"
         >
-          <img src="./assets/img/cesky-film-logo.png" alt="" class="h-14 w-auto md:h-20" width="886" height="741" decoding="async" />
+          <img src="./assets/img/cesky-film-logo.png" alt="" class="nav-logo h-16 w-auto md:h-20 lg:h-24" width="720" height="665" decoding="async" />
         </a>
 
-        <div class="hidden items-center gap-8 text-sm font-semibold uppercase tracking-[0.22em] lg:flex">
-          <a class="transition-colors duration-300 hover:text-copper" href="#o-nas">O nas</a>
+        <div class="nav-links hidden items-center gap-8 text-sm font-semibold uppercase tracking-[0.22em] lg:flex">
+          <a class="transition-colors duration-300 hover:text-copper" href="#o-nas" data-en="About us">O nas</a>
           <a class="transition-colors duration-300 hover:text-copper" href="#menu-glowne">Menu</a>
-          <a class="transition-colors duration-300 hover:text-copper" href="#napoje">Napoje</a>
-          <a class="transition-colors duration-300 hover:text-copper" href="#rezerwacje">Rezerwacje</a>
+          <a class="transition-colors duration-300 hover:text-copper" href="#napoje" data-en="Drinks">Napoje</a>
+          <a class="transition-colors duration-300 hover:text-copper" href="#rezerwacje" data-en="Reservations">Rezerwacje</a>
           <a class="transition-colors duration-300 hover:text-copper" href="#voucher">Voucher</a>
-          <a class="transition-colors duration-300 hover:text-copper" href="#kontakt">Kontakt</a>
+          <a class="transition-colors duration-300 hover:text-copper" href="#kontakt" data-en="Contact">Kontakt</a>
+          <span class="nav-social flex items-center gap-3">
+            <a class="transition-colors duration-300 hover:text-copper" href="https://www.facebook.com/czeskyfilm/" target="_blank" rel="noopener noreferrer" aria-label="„Český Film” na Facebooku" data-en-aria-label="“Český Film” on Facebook">
+              <svg class="h-5 w-5" fill="currentColor" aria-hidden="true"><use href="#icon-facebook"></use></svg>
+            </a>
+            <a class="transition-colors duration-300 hover:text-copper" href="https://www.instagram.com/ceskyfilm/" target="_blank" rel="noopener noreferrer" aria-label="„Český Film” na Instagramie" data-en-aria-label="“Český Film” on Instagram">
+              <svg class="h-5 w-5" fill="currentColor" aria-hidden="true"><use href="#icon-instagram"></use></svg>
+            </a>
+          </span>
         </div>
 
         <div class="hidden items-center gap-4 lg:flex">
+          <div class="lang-switch inline-flex items-center gap-1 text-xs font-bold uppercase tracking-[0.18em]" role="group" aria-label="Język karty / Menu language">
+            <button type="button" class="lang-btn" data-lang="pl" aria-pressed="true">PL</button>
+            <span aria-hidden="true">/</span>
+            <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          </div>
           <a
             href="https://zjedz.my/cesky-film"
             target="_blank"
             rel="noopener noreferrer"
             class="border border-copper px-5 py-3 text-xs font-bold uppercase tracking-[0.2em] text-copper transition-all duration-300 hover:bg-copper hover:text-white"
-          >
+           data-en="Book a table">
             Zarezerwuj stolik
           </a>
         </div>
 
         <div class="flex items-center gap-2 lg:hidden">
+          <div class="lang-switch nav-lang-m inline-flex items-center gap-1 text-xs font-bold uppercase tracking-[0.18em]" role="group" aria-label="Język karty / Menu language">
+            <button type="button" class="lang-btn" data-lang="pl" aria-pressed="true">PL</button>
+            <span aria-hidden="true">/</span>
+            <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          </div>
           <a
             href="https://zjedz.my/cesky-film"
             target="_blank"
             rel="noopener noreferrer"
             class="nav-book h-11 items-center border border-copper px-3 text-[11px] font-bold uppercase tracking-[0.16em] text-copper transition-all duration-300 hover:bg-copper hover:text-white"
-          >
+           data-en="Book">
             Zarezerwuj
           </a>
           <button
@@ -636,7 +768,7 @@
             type="button"
             aria-controls="mobileMenu"
             aria-expanded="false"
-            aria-label="Otwórz menu"
+            aria-label="Otwórz menu" data-en-aria-label="Open menu"
           >
             <span class="block h-0.5 w-5 bg-current"></span>
             <span class="block h-0.5 w-5 bg-current"></span>
@@ -650,18 +782,26 @@
         class="hidden border-t border-brass/10 bg-matte/95 px-5 pb-6 pt-2 backdrop-blur-xl lg:hidden"
       >
         <div class="flex flex-col gap-1 text-sm font-semibold uppercase tracking-[0.2em]">
-          <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#o-nas">O nas</a>
+          <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#o-nas" data-en="About us">O nas</a>
           <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#menu-glowne">Menu</a>
-          <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#napoje">Napoje</a>
-          <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#rezerwacje">Rezerwacje</a>
+          <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#napoje" data-en="Drinks">Napoje</a>
+          <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#rezerwacje" data-en="Reservations">Rezerwacje</a>
           <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#voucher">Voucher</a>
-          <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#kontakt">Kontakt</a>
+          <a class="border-b border-white/10 py-3.5 transition-colors duration-300 hover:text-copper" href="#kontakt" data-en="Contact">Kontakt</a>
+          <div class="flex items-center gap-5 border-b border-white/10 py-3.5">
+            <a class="transition-colors duration-300 hover:text-copper" href="https://www.facebook.com/czeskyfilm/" target="_blank" rel="noopener noreferrer" aria-label="„Český Film” na Facebooku" data-en-aria-label="“Český Film” on Facebook">
+              <svg class="h-6 w-6" fill="currentColor" aria-hidden="true"><use href="#icon-facebook"></use></svg>
+            </a>
+            <a class="transition-colors duration-300 hover:text-copper" href="https://www.instagram.com/ceskyfilm/" target="_blank" rel="noopener noreferrer" aria-label="„Český Film” na Instagramie" data-en-aria-label="“Český Film” on Instagram">
+              <svg class="h-6 w-6" fill="currentColor" aria-hidden="true"><use href="#icon-instagram"></use></svg>
+            </a>
+          </div>
           <a
             href="https://zjedz.my/cesky-film"
             target="_blank"
             rel="noopener noreferrer"
             class="mt-2 border border-copper px-5 py-3 text-center text-xs font-bold uppercase tracking-[0.2em] text-copper transition-all duration-300 hover:bg-copper hover:text-white"
-          >
+           data-en="Book a table">
             Zarezerwuj stolik
           </a>
         </div>
@@ -673,6 +813,7 @@
         id="hero"
         class="relative flex min-h-screen items-center justify-center overflow-hidden bg-matte px-5 py-28"
       >
+        <div class="hero-photo" aria-hidden="true"></div>
         <div class="absolute inset-0 bg-matte" aria-hidden="true"></div>
         <div
           class="absolute inset-0 bg-gradient-to-b from-matte/80 via-matte/70 to-matte"
@@ -683,13 +824,13 @@
           <p class="mb-5 text-xs font-bold uppercase tracking-[0.5em] text-copper md:text-sm">
             Restaurant & Pub
           </p>
-          <h1 class="font-serif text-4xl font-extrabold leading-tight text-pearl md:text-6xl lg:text-7xl">
+          <h1 class="font-serif text-4xl font-extrabold leading-tight text-pearl md:text-6xl lg:text-7xl" data-en="A CZECH FRAME ON THE MAP OF ŁÓDŹ">
             CZESKI KADR NA MAPIE ŁODZI
           </h1>
-          <h2 class="mx-auto mt-6 max-w-3xl text-lg font-medium leading-relaxed text-brass md:text-2xl">
+          <h2 class="mx-auto mt-6 max-w-3xl text-lg font-medium leading-relaxed text-brass md:text-2xl" data-en="Authentic flavours of Poland’s southern neighbours in the historic heart of the city.">
             Autentyczne smaki południowych sąsiadów w historycznym sercu miasta.
           </h2>
-          <p class="mx-auto mt-6 max-w-3xl text-base font-light leading-8 text-pearl/80 md:text-lg">
+          <p class="mx-auto mt-6 max-w-3xl text-base font-light leading-8 text-pearl/80 md:text-lg" data-en="Welcome to “Český Film” – the only restaurant in Łódź where original Czech recipes come to life in the former Scheibler factory complex.">
             Zapraszamy do „Český Film” - jedynej restauracji w Łodzi, gdzie oryginalne czeskie
             receptury ożywają w scenerii pofabrycznego kompleksu Scheiblera.
           </p>
@@ -698,7 +839,7 @@
             <a
               href="#menu-glowne"
               class="w-full bg-copper px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-[#833121] sm:w-auto"
-            >
+             data-en="See the menu">
               Poznaj menu
             </a>
             <a
@@ -706,7 +847,7 @@
               target="_blank"
               rel="noopener noreferrer"
               class="w-full border border-brass px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.2em] text-brass transition-all duration-300 hover:bg-brass hover:text-matte sm:w-auto"
-            >
+             data-en="Book a table">
               Zarezerwuj stolik
             </a>
           </div>
@@ -718,23 +859,23 @@
       <section id="o-nas" class="m-collapsible bg-matte px-5 py-24 md:px-8">
         <div class="mx-auto max-w-6xl">
           <div class="text-center">
-            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">O NAS</h2>
-            <p class="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-brass">Jedno jest pewne – nakarmimy Cię po czesku, do syta i nie wyjdziesz od nas głodny.</p>
+            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl" data-en="ABOUT US">O NAS</h2>
+            <p class="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-brass" data-en="One thing is certain: we will feed you the Czech way, and you will not leave hungry.">Jedno jest pewne – nakarmimy Cię po czesku, do syta i nie wyjdziesz od nas głodny.</p>
           </div>
           <div class="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
             <div class="space-y-6">
-              <p class="leading-relaxed text-[#A0A0A0]">Czesi stworzyli sobie miejsce na ziemi, gdzie można dobrze zjeść, gdzie piwo leje się strumieniem, gdzie czują się swobodnie, bezstresowo, mogą się śmiać i rozmawiać do woli. To miejsce to česká hospoda – tu życie płynie powoli.</p>
-              <p class="m-extra leading-relaxed text-[#A0A0A0]">Dokładamy wszelkich starań, aby Goście czuli się u nas, jak w czeskiej hospodzie.</p>
-              <p class="m-extra leading-relaxed text-[#A0A0A0]">Czechy to smaczna i oryginalna kuchnia. Szef kuchni wraz ze swoim zespołem dbają o jakość serwowanych dań, szukają inspiracji do tworzenia nowości.</p>
+              <p class="leading-relaxed text-[#A0A0A0]" data-en="The Czechs created a place on earth where you can eat well, where beer flows freely, where people feel relaxed and carefree, and can laugh and talk as much as they like. That place is the česká hospoda – here life moves slowly.">Czesi stworzyli sobie miejsce na ziemi, gdzie można dobrze zjeść, gdzie piwo leje się strumieniem, gdzie czują się swobodnie, bezstresowo, mogą się śmiać i rozmawiać do woli. To miejsce to česká hospoda – tu życie płynie powoli.</p>
+              <p class="m-extra leading-relaxed text-[#A0A0A0]" data-en="We do our best to make our Guests feel as if they were in a Czech hospoda.">Dokładamy wszelkich starań, aby Goście czuli się u nas, jak w czeskiej hospodzie.</p>
+              <p class="m-extra leading-relaxed text-[#A0A0A0]" data-en="Czech cuisine is tasty and distinctive. Our head chef and the kitchen team take care of the quality of every dish and look for inspiration for new ones.">Czechy to smaczna i oryginalna kuchnia. Szef kuchni wraz ze swoim zespołem dbają o jakość serwowanych dań, szukają inspiracji do tworzenia nowości.</p>
             </div>
             <div class="space-y-6">
-              <p class="leading-relaxed text-[#A0A0A0]">W naszej karcie znajdziecie czeskie klasyki: <strong>nakládaný hermelín</strong>, <strong>svíčková na smetaně</strong>, <strong>pražská šunka</strong>, <strong>hovězí guláš</strong>, <strong>smažený sýr</strong>, które niezmiennie od lat cieszą się ogromnym powodzeniem wśród naszych Gości.</p>
-              <p class="m-extra leading-relaxed text-[#A0A0A0]">Ale w ofercie znajdziecie Państwo również <strong>ręcznie lepione pierogi</strong>, sałatki, dania wegetariańskie, desery, a także specjalne menu dla dzieci.</p>
-              <p class="m-extra leading-relaxed text-[#A0A0A0]">A jeśli przyjdzie Wam ochota na <strong>golonkę</strong>, to pamiętajcie, że takiej jak w restauracji „Český Film” nie zjecie nigdzie indziej – to nasz as w rękawie.</p>
-              <p class="m-extra leading-relaxed text-[#A0A0A0]">Chcąc urozmaicić nasze menu mamy również dla Państwa dania sezonowe doprawiane szczyptą nowatorskich pomysłów.</p>
+              <p class="leading-relaxed text-[#A0A0A0]" data-en="Our menu includes Czech classics: &lt;strong&gt;nakládaný hermelín&lt;/strong&gt;, &lt;strong&gt;svíčková na smetaně&lt;/strong&gt;, &lt;strong&gt;pražská šunka&lt;/strong&gt;, &lt;strong&gt;hovězí guláš&lt;/strong&gt; and &lt;strong&gt;smažený sýr&lt;/strong&gt;, which have been popular with our Guests for years.">W naszej karcie znajdziecie czeskie klasyki: <strong>nakládaný hermelín</strong>, <strong>svíčková na smetaně</strong>, <strong>pražská šunka</strong>, <strong>hovězí guláš</strong>, <strong>smažený sýr</strong>, które niezmiennie od lat cieszą się ogromnym powodzeniem wśród naszych Gości.</p>
+              <p class="m-extra leading-relaxed text-[#A0A0A0]" data-en="You will also find &lt;strong&gt;handmade pierogi&lt;/strong&gt;, salads, vegetarian dishes, desserts and a special kids’ menu.">Ale w ofercie znajdziecie Państwo również <strong>ręcznie lepione pierogi</strong>, sałatki, dania wegetariańskie, desery, a także specjalne menu dla dzieci.</p>
+              <p class="m-extra leading-relaxed text-[#A0A0A0]" data-en="And if you feel like &lt;strong&gt;pork knuckle&lt;/strong&gt;, remember that you will not find one like at “Český Film” anywhere else – it is our ace in the hole.">A jeśli przyjdzie Wam ochota na <strong>golonkę</strong>, to pamiętajcie, że takiej jak w restauracji „Český Film” nie zjecie nigdzie indziej – to nasz as w rękawie.</p>
+              <p class="m-extra leading-relaxed text-[#A0A0A0]" data-en="We also serve seasonal dishes with a pinch of new ideas.">Chcąc urozmaicić nasze menu mamy również dla Państwa dania sezonowe doprawiane szczyptą nowatorskich pomysłów.</p>
             </div>
           </div>
-          <button type="button" class="m-only m-more-button text-pearl" aria-expanded="false" data-more>Czytaj więcej</button>
+          <button type="button" class="m-only m-more-button text-pearl" aria-expanded="false" data-more data-en="Read more">Czytaj więcej</button>
         </div>
       </section>
 
@@ -743,10 +884,10 @@
       <section id="menu-glowne" class="bg-matte px-5 pb-16 pt-12 md:px-8 lg:pb-20 lg:pt-16">
         <div class="mx-auto max-w-7xl border-t border-copper/80 pt-12">
           <div class="mx-auto max-w-4xl text-center">
-            <h2 class="font-serif text-3xl font-bold leading-tight text-pearl md:text-5xl">
+            <h2 class="font-serif text-3xl font-bold leading-tight text-pearl md:text-5xl" data-en="CLASSICS OF THE GENRE">
               KLASYKA GATUNKU
             </h2>
-            <ul class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-[#A0A0A0]" aria-label="Legenda oznaczeń w menu">
+            <ul class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-[#A0A0A0]" aria-label="Legenda oznaczeń w menu" data-en-aria-label="Menu symbols">
               <li class="inline-flex items-center gap-2">
                 <svg class="h-5 w-5 shrink-0 text-white" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                   <use href="#icon-leaf"></use>
@@ -759,13 +900,6 @@
                 </svg>
                 <span data-i18n="ostre">Ostre</span>
               </li>
-              <li class="inline-flex items-center">
-                <div class="lang-switch inline-flex items-center gap-1 text-xs font-bold uppercase tracking-[0.18em]" role="group" aria-label="Język karty / Menu language">
-                <button type="button" class="lang-btn" data-lang="pl" aria-pressed="true">PL</button>
-                <span aria-hidden="true">/</span>
-                <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-              </div>
-              </li>
             </ul>
           </div>
 
@@ -773,7 +907,7 @@
             id="menuTabs"
             class="hide-scrollbar mx-auto mt-6 flex max-w-5xl gap-3 overflow-x-auto border-b border-[#333333] md:flex-wrap md:justify-center"
             role="tablist"
-            aria-label="Kategorie karty głównej"
+            aria-label="Kategorie karty głównej" data-en-aria-label="Food menu categories"
           ></div>
 
           <div id="menuPanels" class="mx-auto mt-6 max-w-6xl"></div>
@@ -786,18 +920,11 @@
       <section id="napoje" class="bg-matte px-5 py-24 md:px-8">
         <div class="mx-auto max-w-7xl">
           <div class="mx-auto max-w-4xl text-center">
-            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">NAPOJE</h2>
+            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl" data-en="DRINKS">NAPOJE</h2>
             <div class="mx-auto mt-6 max-w-3xl space-y-4">
-              <p class="leading-relaxed text-[#A0A0A0]">Oprócz czeskiego piwa w ofercie restauracji „Český Film” znajdziecie też inne destylaty, a wśród nich nie może oczywiście zabraknąć śliwowicy i gruszkowicy z destylarni Rudolfa Jelínka. Mamy także wina (w wersji bezalkoholowej też), wódki, whisky, drinki…</p>
-              <p class="leading-relaxed text-[#A0A0A0]">Wśród napojów prym wiedzie Kofola.</p>
-              <p class="leading-relaxed text-[#A0A0A0]">Sezonowo przygotowujemy dla Państwa ofertę z lemoniadami i letnimi mocktailami oraz na chłodniejsze dni napoje rozgrzewające.</p>
-            </div>
-            <div class="mt-6 flex justify-center text-xs text-[#A0A0A0]">
-              <div class="lang-switch inline-flex items-center gap-1 text-xs font-bold uppercase tracking-[0.18em]" role="group" aria-label="Język karty / Menu language">
-                <button type="button" class="lang-btn" data-lang="pl" aria-pressed="true">PL</button>
-                <span aria-hidden="true">/</span>
-                <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-              </div>
+              <p class="leading-relaxed text-[#A0A0A0]" data-en="Besides Czech beer, at “Český Film” you will find other spirits, including, of course, slivovice and pear brandy from the Rudolf Jelínek distillery. We also have wines (alcohol-free too), vodkas, whisky and cocktails…">Oprócz czeskiego piwa w ofercie restauracji „Český Film” znajdziecie też inne destylaty, a wśród nich nie może oczywiście zabraknąć śliwowicy i gruszkowicy z destylarni Rudolfa Jelínka. Mamy także wina (w wersji bezalkoholowej też), wódki, whisky, drinki…</p>
+              <p class="leading-relaxed text-[#A0A0A0]" data-en="Among soft drinks, Kofola leads the way.">Wśród napojów prym wiedzie Kofola.</p>
+              <p class="leading-relaxed text-[#A0A0A0]" data-en="Seasonally we serve lemonades and summer mocktails, and warming drinks on colder days.">Sezonowo przygotowujemy dla Państwa ofertę z lemoniadami i letnimi mocktailami oraz na chłodniejsze dni napoje rozgrzewające.</p>
             </div>
           </div>
 
@@ -805,7 +932,7 @@
             id="drinkTabs"
             class="hide-scrollbar mx-auto mt-6 flex max-w-5xl gap-3 overflow-x-auto border-b border-[#333333] md:flex-wrap md:justify-center"
             role="tablist"
-            aria-label="Kategorie karty napojów"
+            aria-label="Kategorie karty napojów" data-en-aria-label="Drinks menu categories"
           ></div>
 
           <div id="drinkPanels" class="mx-auto mt-6 max-w-6xl"></div>
@@ -816,118 +943,116 @@
       <section id="piwo" class="bg-matte px-5 py-24 md:px-8">
         <div class="mx-auto max-w-6xl">
           <div class="text-center">
-            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">PIVOVAR ČERNÁ HORA I NASZE PIWA</h2>
-            <p class="mt-4 text-sm font-semibold uppercase tracking-[0.28em] text-brass">Gdzie się piwo pije, tam się dobrze żyje</p>
+            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl" data-en="PIVOVAR ČERNÁ HORA AND OUR BEERS">PIVOVAR ČERNÁ HORA I NASZE PIWA</h2>
+            <p class="mt-4 text-sm font-semibold uppercase tracking-[0.28em] text-brass" data-en="Where beer is drunk, life is good">Gdzie się piwo pije, tam się dobrze żyje</p>
           </div>
 
-          <div class="relative mx-auto mt-10 aspect-[3/2] w-full max-w-md overflow-hidden">
-            <img src="./assets/img/cerna-hora-logo.jpg" alt="Podświetlane logo browaru Černá Hora z datą 1298" class="h-full w-full object-cover" width="1200" height="795" loading="lazy" decoding="async" />
-          </div>
+          <img src="./assets/img/cerna-hora-znak.png" alt="Logo browaru Černá Hora z datą 1298" data-en-alt="Černá Hora brewery logo with the date 1298" class="cerna-hora-znak mx-auto mt-8 block w-40 md:w-48" width="640" height="555" loading="lazy" decoding="async" />
 
           <div class="m-beers mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <article class="flex flex-col border border-[#B8975E]/25 px-6 py-6">
               <h3 class="font-serif text-2xl font-bold text-pearl">Ležák</h3>
-              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">Jasny lager</p>
+              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]" data-en="Pale lager">Jasny lager</p>
               <dl class="mt-auto flex flex-wrap gap-x-6 gap-y-2 pt-5 text-xs">
                 <div class="inline-flex items-baseline gap-2">
-                  <dt class="text-[#A0A0A0]">Alk.</dt>
+                  <dt class="text-[#A0A0A0]" data-en="ABV">Alk.</dt>
                   <dd class="font-semibold text-pearl">4,8%</dd>
                 </div>
                 <div class="inline-flex items-baseline gap-2">
-                  <dt class="text-[#A0A0A0]">Ekstrakt</dt>
+                  <dt class="text-[#A0A0A0]" data-en="Extract">Ekstrakt</dt>
                   <dd class="font-semibold text-pearl">12%</dd>
                 </div>
               </dl>
             </article>
             <article class="flex flex-col border border-[#B8975E]/25 px-6 py-6">
               <h3 class="font-serif text-2xl font-bold text-pearl">Medová</h3>
-              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">Jasne, z miodowym posmakiem</p>
+              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]" data-en="Pale, with a honey taste">Jasne, z miodowym posmakiem</p>
               <dl class="mt-auto flex flex-wrap gap-x-6 gap-y-2 pt-5 text-xs">
                 <div class="inline-flex items-baseline gap-2">
-                  <dt class="text-[#A0A0A0]">Alk.</dt>
+                  <dt class="text-[#A0A0A0]" data-en="ABV">Alk.</dt>
                   <dd class="font-semibold text-pearl">5,7%</dd>
                 </div>
                 <div class="inline-flex items-baseline gap-2">
-                  <dt class="text-[#A0A0A0]">Ekstrakt</dt>
+                  <dt class="text-[#A0A0A0]" data-en="Extract">Ekstrakt</dt>
                   <dd class="font-semibold text-pearl">12%</dd>
                 </div>
               </dl>
             </article>
             <article class="flex flex-col border border-[#B8975E]/25 px-6 py-6">
               <h3 class="font-serif text-2xl font-bold text-pearl">Granát</h3>
-              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">Ciemne, z karmelowo-kawowymi nutami</p>
+              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]" data-en="Dark, with caramel and coffee notes">Ciemne, z karmelowo-kawowymi nutami</p>
               <dl class="mt-auto flex flex-wrap gap-x-6 gap-y-2 pt-5 text-xs">
                 <div class="inline-flex items-baseline gap-2">
-                  <dt class="text-[#A0A0A0]">Alk.</dt>
+                  <dt class="text-[#A0A0A0]" data-en="ABV">Alk.</dt>
                   <dd class="font-semibold text-pearl">4,5%</dd>
                 </div>
                 <div class="inline-flex items-baseline gap-2">
-                  <dt class="text-[#A0A0A0]">Ekstrakt</dt>
+                  <dt class="text-[#A0A0A0]" data-en="Extract">Ekstrakt</dt>
                   <dd class="font-semibold text-pearl">12%</dd>
                 </div>
               </dl>
             </article>
             <article class="flex flex-col border border-[#B8975E]/25 px-6 py-6">
               <h3 class="font-serif text-2xl font-bold text-pearl">Velen</h3>
-              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">Niefiltrowany lager pszeniczny</p>
+              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]" data-en="Unfiltered wheat lager">Niefiltrowany lager pszeniczny</p>
               <dl class="mt-auto flex flex-wrap gap-x-6 gap-y-2 pt-5 text-xs">
                 <div class="inline-flex items-baseline gap-2">
-                  <dt class="text-[#A0A0A0]">Alk.</dt>
+                  <dt class="text-[#A0A0A0]" data-en="ABV">Alk.</dt>
                   <dd class="font-semibold text-pearl">4,5%</dd>
                 </div>
               </dl>
             </article>
             <article class="flex flex-col border border-[#B8975E]/25 px-6 py-6">
               <h3 class="font-serif text-2xl font-bold text-pearl">IPA</h3>
-              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">Górna fermentacja, cytrusowo-żywiczne aromaty</p>
+              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]" data-en="Top-fermented, with citrus and resin aromas">Górna fermentacja, cytrusowo-żywiczne aromaty</p>
               <dl class="mt-auto flex flex-wrap gap-x-6 gap-y-2 pt-5 text-xs">
                 <div class="inline-flex items-baseline gap-2">
-                  <dt class="text-[#A0A0A0]">Alk.</dt>
+                  <dt class="text-[#A0A0A0]" data-en="ABV">Alk.</dt>
                   <dd class="font-semibold text-pearl">5,4%</dd>
                 </div>
                 <div class="inline-flex items-baseline gap-2">
-                  <dt class="text-[#A0A0A0]">Ekstrakt</dt>
+                  <dt class="text-[#A0A0A0]" data-en="Extract">Ekstrakt</dt>
                   <dd class="font-semibold text-pearl">14%</dd>
                 </div>
               </dl>
             </article>
             <article class="flex flex-col border border-[#B8975E]/25 px-6 py-6">
               <h3 class="font-serif text-2xl font-bold text-pearl">Řezané</h3>
-              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">Pół kufla Medová, pół Granát</p>
+              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]" data-en="Half Medová, half Granát">Pół kufla Medová, pół Granát</p>
             </article>
             <article class="col-span-full flex flex-col items-center border border-[#B8975E]/25 px-6 py-6 text-center">
-              <h3 class="font-serif text-2xl font-bold uppercase text-pearl">Zestaw degustacyjny</h3>
-              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">5 piw po 150 ml</p>
+              <h3 class="font-serif text-2xl font-bold uppercase text-pearl" data-en="Tasting flight">Zestaw degustacyjny</h3>
+              <p class="mt-2 text-sm leading-6 text-[#A0A0A0]" data-en="5 beers, 150 ml each">5 piw po 150 ml</p>
             </article>
           </div>
-          <p class="mt-5 text-center text-sm leading-6 text-[#A0A0A0]">Oferta piw butelkowanych zmienia się — zapytajcie kelnerów o aktualny wybór.</p>
+          <p class="mt-5 text-center text-sm leading-6 text-[#A0A0A0]" data-en="Our bottled beer selection changes — ask our staff what is available.">Oferta piw butelkowanych zmienia się — zapytajcie kelnerów o aktualny wybór.</p>
 
           <div class="mt-10 grid grid-cols-1 items-center gap-10 border-t border-[#B8975E]/25 pt-10 lg:grid-cols-2 lg:gap-12">
             <div>
-              <h3 class="font-serif text-3xl font-bold text-pearl">Z historii browaru</h3>
-              <p class="mt-4 text-sm leading-6 text-[#A0A0A0]">W miejscowości Černá Hora piwowarska tradycja sięga średniowiecza. Przez wieki browar przechodził przez ręce templariuszy, prywatnych właścicieli i spółek, rozwijał się i odbudowywał po pożarach.</p>
+              <h3 class="font-serif text-3xl font-bold text-pearl" data-en="From the brewery’s history">Z historii browaru</h3>
+              <p class="mt-4 text-sm leading-6 text-[#A0A0A0]" data-en="In Černá Hora, the brewing tradition dates back to the Middle Ages. Over the centuries the brewery passed through the hands of the Knights Templar, private owners and companies, and was expanded and rebuilt after fires.">W miejscowości Černá Hora piwowarska tradycja sięga średniowiecza. Przez wieki browar przechodził przez ręce templariuszy, prywatnych właścicieli i spółek, rozwijał się i odbudowywał po pożarach.</p>
               <ol class="mt-6 space-y-6 border-l border-[#B8975E]/30 pl-6">
                 <li class="grid grid-cols-[4.5rem_1fr] items-center gap-4">
                   <h4 class="font-serif text-2xl font-bold text-pearl">1298</h4>
-                  <p class="text-sm leading-6 text-[#A0A0A0]">Pierwsze wzmianki o czernohorskim piwie, podanym podczas uroczystości przekazania majątków.</p>
+                  <p class="text-sm leading-6 text-[#A0A0A0]" data-en="First mention of Černá Hora beer, served at a ceremony marking the transfer of estates.">Pierwsze wzmianki o czernohorskim piwie, podanym podczas uroczystości przekazania majątków.</p>
                 </li>
                 <li class="grid grid-cols-[4.5rem_1fr] items-center gap-4">
                   <h4 class="font-serif text-2xl font-bold text-pearl">1530</h4>
-                  <p class="text-sm leading-6 text-[#A0A0A0]">Pierwsza pisemna wzmianka o samym browarze Černá Hora.</p>
+                  <p class="text-sm leading-6 text-[#A0A0A0]" data-en="First written mention of the Černá Hora brewery itself.">Pierwsza pisemna wzmianka o samym browarze Černá Hora.</p>
                 </li>
                 <li class="grid grid-cols-[4.5rem_1fr] items-center gap-4">
                   <h4 class="font-serif text-2xl font-bold text-pearl">1996</h4>
-                  <p class="text-sm leading-6 text-[#A0A0A0]">Browar działa jako spółka pod nazwą Pivovar Černá Hora.</p>
+                  <p class="text-sm leading-6 text-[#A0A0A0]" data-en="The brewery operates as a company named Pivovar Černá Hora.">Browar działa jako spółka pod nazwą Pivovar Černá Hora.</p>
                 </li>
                 <li class="grid grid-cols-[4.5rem_1fr] items-center gap-4">
                   <h4 class="font-serif text-2xl font-bold text-pearl">2011</h4>
-                  <p class="text-sm leading-6 text-[#A0A0A0]">Od tego roku piwo Černá Hora w łódzkiej restauracji „Český Film”.</p>
+                  <p class="text-sm leading-6 text-[#A0A0A0]" data-en="Since this year, Černá Hora beer has been served at “Český Film” in Łódź.">Od tego roku piwo Černá Hora w łódzkiej restauracji „Český Film”.</p>
                 </li>
               </ol>
             </div>
             <figure class="mx-auto w-full max-w-lg">
               <div class="relative aspect-[3/2] overflow-hidden">
-                <img src="./assets/img/bar-cerna-hora.jpg" alt="Bar restauracji „Český Film” z kranami piwnymi Černá Hora" class="h-full w-full object-cover" width="1200" height="797" loading="lazy" decoding="async" />
+                <img src="./assets/img/bar-cerna-hora.jpg" alt="Bar restauracji „Český Film” z kranami piwnymi Černá Hora" data-en-alt="The bar at “Český Film” with Černá Hora beer taps" class="h-full w-full object-cover" width="1200" height="797" loading="lazy" decoding="async" />
                 <div class="pointer-events-none absolute inset-0 bg-black/30"></div>
               </div>
             </figure>
@@ -940,16 +1065,16 @@
       <section id="rezerwacje" class="m-collapsible bg-matte px-5 py-24 md:px-8">
         <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
           <div>
-            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">REZERWACJE</h2>
+            <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl" data-en="RESERVATIONS">REZERWACJE</h2>
             <div class="mt-8 space-y-6">
-              <p class="leading-relaxed text-[#A0A0A0]">Organizujemy spotkania biznesowe, eventy firmowe oraz rodzinne obiady i kolacje: imieninowe, urodzinowe, jubileuszowe, a także po uroczystościach ślubu, chrztu, komunii i pogrzebu. Dla grup proponujemy osobną salę Riposta.</p>
-              <p class="m-extra leading-relaxed text-[#A0A0A0]">Nasz zespół zadba o każdy szczegół spotkania — od dekoracji stołów po przygotowanie menu dopasowanego do Państwa oczekiwań i upodobań. Zapraszamy do kontaktu i omówienia szczegółów rezerwacji.</p>
+              <p class="leading-relaxed text-[#A0A0A0]" data-en="We host business meetings, company events and family lunches and dinners: name days, birthdays and anniversaries, as well as receptions after weddings, christenings, first communions and funerals. For groups we offer a separate room, Riposta.">Organizujemy spotkania biznesowe, eventy firmowe oraz rodzinne obiady i kolacje: imieninowe, urodzinowe, jubileuszowe, a także po uroczystościach ślubu, chrztu, komunii i pogrzebu. Dla grup proponujemy osobną salę Riposta.</p>
+              <p class="m-extra leading-relaxed text-[#A0A0A0]" data-en="Our team will take care of every detail — from table decorations to a menu tailored to your wishes and tastes. Get in touch to discuss the details of your booking.">Nasz zespół zadba o każdy szczegół spotkania — od dekoracji stołów po przygotowanie menu dopasowanego do Państwa oczekiwań i upodobań. Zapraszamy do kontaktu i omówienia szczegółów rezerwacji.</p>
             </div>
-            <button type="button" class="m-only m-more-button text-pearl" aria-expanded="false" data-more>Czytaj więcej</button>
-            <a href="tel:+48881403888" class="mt-8 inline-flex border border-copper px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-copper transition-all duration-300 hover:bg-copper hover:text-white">Zadzwoń do nas</a>
+            <button type="button" class="m-only m-more-button text-pearl" aria-expanded="false" data-more data-en="Read more">Czytaj więcej</button>
+            <a href="tel:+48881403888" class="mt-8 inline-flex border border-copper px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-copper transition-all duration-300 hover:bg-copper hover:text-white" data-en="Call us">Zadzwoń do nas</a>
           </div>
           <div class="relative mx-auto aspect-[4/3] w-full max-w-lg overflow-hidden">
-            <img src="./assets/img/zdjecie-02.jpg" alt="Sala restauracji „Český Film” ze stołami przygotowanymi na przyjęcie" class="h-full w-full object-cover" width="1448" height="1086" loading="lazy" decoding="async" />
+            <img src="./assets/img/zdjecie-02.jpg" alt="Sala restauracji „Český Film” ze stołami przygotowanymi na przyjęcie" data-en-alt="The dining room at “Český Film” with tables set for a reception" class="h-full w-full object-cover" width="1448" height="1086" loading="lazy" decoding="async" />
             <div class="pointer-events-none absolute inset-0 bg-black/30"></div>
           </div>
         </div>
@@ -961,9 +1086,9 @@
         <div class="mx-auto max-w-3xl text-center">
           <h2 class="font-serif text-4xl font-bold text-pearl md:text-5xl">VOUCHER</h2>
           <div class="mt-6 space-y-4">
-            <p class="leading-relaxed text-[#A0A0A0]">Jeśli szukasz upominku, ale nie wiesz, co będzie najlepszym pomysłem, wybierz voucher do restauracji „Český Film”.</p>
-            <p class="leading-relaxed text-[#A0A0A0]">Voucher sprawdzi się z okazji świąt, urodzin i uroczystości rodzinnych oraz jako upominek dla współpracowników lub klientów.</p>
-            <p class="leading-relaxed text-[#A0A0A0]">Voucher można zamówić telefonicznie lub mailowo.</p>
+            <p class="leading-relaxed text-[#A0A0A0]" data-en="If you are looking for a gift but are not sure what to choose, pick a voucher for “Český Film”.">Jeśli szukasz upominku, ale nie wiesz, co będzie najlepszym pomysłem, wybierz voucher do restauracji „Český Film”.</p>
+            <p class="leading-relaxed text-[#A0A0A0]" data-en="A voucher works well for holidays, birthdays and family celebrations, and as a gift for colleagues or clients.">Voucher sprawdzi się z okazji świąt, urodzin i uroczystości rodzinnych oraz jako upominek dla współpracowników lub klientów.</p>
+            <p class="leading-relaxed text-[#A0A0A0]" data-en="Vouchers can be ordered by phone or email.">Voucher można zamówić telefonicznie lub mailowo.</p>
           </div>
           <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a href="tel:+48881403888" class="inline-flex border border-copper px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-copper transition-all duration-300 hover:bg-copper hover:text-white">+48 881 403 888</a>
@@ -976,10 +1101,10 @@
       <section id="kontakt" class="bg-matte px-5 pb-16 pt-8 md:px-8 lg:pb-20 lg:pt-10">
         <div class="mx-auto max-w-6xl">
           <div class="text-center">
-            <h2 class="font-serif text-4xl font-bold text-brass md:text-5xl">
+            <h2 class="font-serif text-4xl font-bold text-brass md:text-5xl" data-en="FINAL FRAME">
               KADR KOŃCOWY
             </h2>
-            <p class="mb-8 mt-3 text-sm font-medium tracking-wide text-pearl">
+            <p class="mb-8 mt-3 text-sm font-medium tracking-wide text-pearl" data-en="Visit us and feel the atmosphere.">
               Odwiedź nas i poczuj ten klimat.
             </p>
           </div>
@@ -987,7 +1112,7 @@
           <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
             <div class="flex flex-col gap-6">
               <div>
-                <h3 class="text-sm font-bold uppercase tracking-[0.24em] text-copper">
+                <h3 class="text-sm font-bold uppercase tracking-[0.24em] text-copper" data-en="Location">
                   Lokalizacja
                 </h3>
                 <address class="mt-2 whitespace-pre-line text-base not-italic leading-6 text-pearl">Kompleks u Scheiblera
@@ -996,14 +1121,14 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
               </div>
 
               <div>
-                <h3 class="text-sm font-bold uppercase tracking-[0.24em] text-copper">
+                <h3 class="text-sm font-bold uppercase tracking-[0.24em] text-copper" data-en="Contact">
                   Kontakt
                 </h3>
                 <div class="mt-2 flex flex-col items-start gap-1 text-base leading-6 text-pearl">
-                  <a href="tel:+48881403888" class="transition-colors duration-300 hover:text-brass">
+                  <a href="tel:+48881403888" class="transition-colors duration-300 hover:text-brass" data-en="+48 881 403 888 · restaurant">
                     +48 881 403 888 · restauracja
                   </a>
-                  <a href="tel:+48537471950" class="transition-colors duration-300 hover:text-brass">
+                  <a href="tel:+48537471950" class="transition-colors duration-300 hover:text-brass" data-en="+48 537 471 950 · restaurant manager">
                     +48 537 471 950 · manager restauracji
                   </a>
                   <a
@@ -1016,28 +1141,38 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
               </div>
 
               <div>
-                <h3 class="text-sm font-bold uppercase tracking-[0.24em] text-copper">
+                <h3 class="text-sm font-bold uppercase tracking-[0.24em] text-copper" data-en="Opening hours">
                   Godziny otwarcia
                 </h3>
                 <dl class="mt-3 grid max-w-lg grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-2 text-sm leading-6 text-pearl md:text-base">
-                  <dt>Poniedziałek – Czwartek</dt>
+                  <dt data-en="Monday – Thursday">Poniedziałek – Czwartek</dt>
                   <dd class="font-medium text-brass">12:00 – 22:00</dd>
-                  <dt>Piątek – Sobota</dt>
+                  <dt data-en="Friday – Saturday">Piątek – Sobota</dt>
                   <dd class="font-medium text-brass">12:00 – 23:00</dd>
-                  <dt>Niedziela</dt>
+                  <dt data-en="Sunday">Niedziela</dt>
                   <dd class="font-medium text-brass">12:00 – 21:00</dd>
                 </dl>
-                <p class="mt-2 text-sm leading-6 text-[#A0A0A0]">Standardowe godziny otwarcia mogą ulec zmianie. Aktualne informacje na naszej <a href="https://www.google.com/maps?q=%C4%8Cesk%C3%BD%20Film%20%C5%81%C3%B3d%C5%BA%20Tymienieckiego" target="_blank" rel="noopener noreferrer" class="transition-colors duration-300 hover:text-brass">wizytówce Google</a>.</p>
+                <p class="mt-2 text-sm leading-6 text-[#A0A0A0]" data-en="Standard opening hours may change. Up-to-date information is on our &lt;a href=&quot;https://www.google.com/maps?q=%C4%8Cesk%C3%BD%20Film%20%C5%81%C3%B3d%C5%BA%20Tymienieckiego&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;transition-colors duration-300 hover:text-brass&quot;&gt;Google Business Profile&lt;/a&gt;.">Standardowe godziny otwarcia mogą ulec zmianie. Aktualne informacje na naszej <a href="https://www.google.com/maps?q=%C4%8Cesk%C3%BD%20Film%20%C5%81%C3%B3d%C5%BA%20Tymienieckiego" target="_blank" rel="noopener noreferrer" class="transition-colors duration-300 hover:text-brass">wizytówce Google</a>.</p>
               </div>
               <div>
-                <h3 class="text-sm font-bold uppercase tracking-[0.24em] text-copper">Opinie</h3>
-                <p class="mt-2 text-sm leading-6 text-[#A0A0A0]"><a href="https://www.google.com/maps?q=%C4%8Cesk%C3%BD%20Film%20%C5%81%C3%B3d%C5%BA%20Tymienieckiego" target="_blank" rel="noopener noreferrer" class="transition-colors duration-300 hover:text-brass">Przeczytaj opinie naszych Gości w Google</a></p>
+                <h3 class="text-sm font-bold uppercase tracking-[0.24em] text-copper" data-en="Reviews">Opinie</h3>
+                <a
+                  href="https://www.google.com/maps?q=%C4%8Cesk%C3%BD%20Film%20%C5%81%C3%B3d%C5%BA%20Tymienieckiego"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-3 inline-flex items-center gap-3 border border-copper px-6 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-copper transition-all duration-300 hover:bg-copper hover:text-white"
+                >
+                  <span data-en="Read reviews on Google">Przeczytaj opinie w Google</span>
+                  <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 17 17 7M8 7h9v9" />
+                  </svg>
+                </a>
               </div>
             </div>
 
             <div class="relative min-h-[350px] overflow-hidden rounded-sm border border-gray-800 bg-black">
               <iframe
-                title="Mapa dojazdu do restauracji „Český Film” w Łodzi"
+                title="Mapa dojazdu do restauracji „Český Film” w Łodzi" data-en-title="Map showing how to reach “Český Film” in Łódź"
                 src="https://www.google.com/maps?q=%C4%8Cesk%C3%BD%20Film%20%C5%81%C3%B3d%C5%BA%20Tymienieckiego&output=embed"
                 class="absolute inset-0 h-full w-full"
                 loading="lazy"
@@ -1055,7 +1190,7 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
       target="_blank"
       rel="noopener noreferrer"
       class="booking-float group fixed bottom-5 right-5 z-[70] flex max-w-[calc(100vw-2.5rem)] items-center gap-3 bg-copper p-2.5 pr-5 text-white transition duration-300 hover:-translate-y-1 hover:bg-[#833121] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brass md:bottom-7 md:right-7 md:gap-4 md:p-3 md:pr-6"
-      aria-label="Zarezerwuj stolik w „Český Film” przez zjedz.my — otwiera się w nowej karcie"
+      aria-label="Zarezerwuj stolik w „Český Film” przez zjedz.my — otwiera się w nowej karcie" data-en-aria-label="Book a table at “Český Film” via zjedz.my — opens in a new tab"
     >
       <span
         class="booking-float-icon flex h-11 w-11 shrink-0 items-center justify-center bg-matte/20 transition-transform duration-300 md:h-12 md:w-12"
@@ -1067,10 +1202,10 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
         </svg>
       </span>
       <span class="text-left">
-        <span class="block text-[10px] font-semibold uppercase tracking-[0.2em] text-white/70">
+        <span class="block text-[10px] font-semibold uppercase tracking-[0.2em] text-white/70" data-en="Online booking">
           Rezerwacja online
         </span>
-        <span class="mt-0.5 block text-sm font-bold uppercase tracking-[0.08em] md:text-base">
+        <span class="mt-0.5 block text-sm font-bold uppercase tracking-[0.08em] md:text-base" data-en="Book a table">
           Zarezerwuj stolik
         </span>
       </span>
@@ -1088,7 +1223,7 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
 
     <footer class="border-t border-gray-900 bg-black px-5 py-8 md:px-8">
       <div class="mx-auto flex max-w-6xl flex-col items-center justify-center text-center">
-        <p class="text-xs text-gray-500">
+        <p class="text-xs text-gray-500" data-en="© 2026 “Český Film”. All rights reserved.">
           © 2026 „Český Film”. Wszelkie prawa zastrzeżone.
         </p>
       </div>
@@ -1505,7 +1640,46 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
         });
       }
 
-      renderCards("pl");
+      // Tłumaczenie całej strony: tekst angielski w atrybucie data-en (innerHTML),
+      // atrybuty w data-en-aria-label / data-en-alt / data-en-title.
+      const PAGE_META = {
+        pl: { title: document.title, description: document.querySelector('meta[name="description"]').content },
+        en: { title: "“Český Film” | Restaurant & Pub in Łódź", description: "“Český Film” – a Czech restaurant and pub in the historic heart of Łódź." },
+      };
+      const I18N_ATTRS = ["aria-label", "alt", "title"];
+
+      function setLang(lang) {
+        const en = lang === "en";
+        document.querySelectorAll("[data-en]").forEach((el) => {
+          if (el.dataset.pl === undefined) el.dataset.pl = el.innerHTML;
+          el.innerHTML = en ? el.dataset.en : el.dataset.pl;
+        });
+        I18N_ATTRS.forEach((name) => {
+          document.querySelectorAll(`[data-en-${name}]`).forEach((el) => {
+            const store = `data-pl-${name}`;
+            if (!el.hasAttribute(store)) el.setAttribute(store, el.getAttribute(name));
+            el.setAttribute(name, el.getAttribute(en ? `data-en-${name}` : store));
+          });
+        });
+        document.querySelectorAll("[data-more]").forEach((button) => {
+          const expanded = button.getAttribute("aria-expanded") === "true";
+          button.textContent = expanded ? (en ? "Show less" : "Zwiń") : en ? "Read more" : "Czytaj więcej";
+        });
+        document.documentElement.lang = lang;
+        document.title = PAGE_META[lang].title;
+        document.querySelector('meta[name="description"]').content = PAGE_META[lang].description;
+        renderCards(lang);
+        try {
+          localStorage.setItem("ceskyFilmLang", lang);
+        } catch (error) {}
+      }
+
+      const urlLang = new URLSearchParams(location.search).get("lang");
+      let savedLang = null;
+      try {
+        savedLang = localStorage.getItem("ceskyFilmLang");
+      } catch (error) {}
+      setLang(urlLang === "en" || urlLang === "pl" ? urlLang : savedLang === "en" ? "en" : "pl");
     </script>
 
     <script>
@@ -1607,7 +1781,8 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
           const section = button.closest(".m-collapsible");
           const expanded = section.classList.toggle("is-expanded");
           button.setAttribute("aria-expanded", String(expanded));
-          button.textContent = expanded ? "Zwiń" : "Czytaj więcej";
+          const en = document.documentElement.lang === "en";
+          button.textContent = expanded ? (en ? "Show less" : "Zwiń") : en ? "Read more" : "Czytaj więcej";
           if (!expanded) section.scrollIntoView({ behavior: "smooth", block: "start" });
         });
       });
@@ -1633,7 +1808,7 @@ ul. Ks. Biskupa Wincentego Tymienieckiego 25a
         if (tab) activateTab(tab);
 
         const langButton = event.target.closest(".lang-btn");
-        if (langButton) renderCards(langButton.dataset.lang);
+        if (langButton) setLang(langButton.dataset.lang);
 
         const photoButton = event.target.closest(".dish-photo-button");
         if (photoButton) {
