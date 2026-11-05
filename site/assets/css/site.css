@@ -1,0 +1,639 @@
+html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: #121212;
+        color: #f5f5f5;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 60;
+        opacity: 0.08;
+        background-image:
+          radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.45) 0 1px, transparent 1px),
+          radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.35) 0 1px, transparent 1px);
+        background-size: 4px 4px, 7px 7px;
+        mix-blend-mode: overlay;
+      }
+
+      .nav-scrolled {
+        background: rgba(18, 18, 18, 0.88);
+        border-bottom-color: rgba(184, 151, 94, 0.2);
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(16px);
+      }
+
+
+      .film-strip-bottom::after,
+      .film-strip-frame::before,
+      .film-strip-frame::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 18px;
+        background:
+          linear-gradient(90deg, #b8975e 0 12px, transparent 12px 28px) repeat-x,
+          linear-gradient(#b8975e, #b8975e);
+        background-size: 28px 18px, 100% 2px;
+        background-position: left center, left center;
+        opacity: 0.9;
+      }
+
+      .film-strip-bottom::after {
+        bottom: 0;
+      }
+
+      .film-strip-frame::before {
+        top: 0;
+        transform: translateY(-50%);
+      }
+
+      .film-strip-frame::after {
+        bottom: 0;
+        transform: translateY(50%);
+      }
+
+      .cinema-mask {
+        -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+        mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+      }
+
+      .hide-scrollbar {
+        scrollbar-width: none;
+      }
+
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* backwards: po animacji panel nie ma transformu, więc podgląd zdjęcia
+         (position: fixed) liczy się od ekranu i leży nad kolejnymi sekcjami */
+      .tab-panel {
+        animation: menuFade 360ms ease backwards;
+      }
+
+      .booking-float {
+        box-shadow:
+          0 22px 60px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(184, 151, 94, 0.18);
+        animation: bookingFloatIn 600ms 500ms ease both;
+      }
+
+      .booking-float:hover .booking-float-icon {
+        transform: rotate(-8deg) scale(1.08);
+      }
+
+      .dish-photo {
+        position: relative;
+        display: inline-flex;
+        margin-left: 0.4rem;
+        vertical-align: middle;
+      }
+
+      .dish-photo-button {
+        display: inline-flex;
+        height: 1.7rem;
+        width: 1.7rem;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(184, 151, 94, 0.5);
+        background: rgba(184, 151, 94, 0.1);
+        color: #b8975e;
+        transition:
+          border-color 180ms ease,
+          background-color 180ms ease,
+          color 180ms ease;
+      }
+
+      .dish-photo-button:hover,
+      .dish-photo-button:focus-visible {
+        border-color: #b8975e;
+        background: rgba(184, 151, 94, 0.18);
+        color: #f5f5f5;
+        outline: 2px solid rgba(184, 151, 94, 0.75);
+        outline-offset: 3px;
+      }
+
+      .dish-photo-button svg {
+        height: 1rem;
+        width: 1rem;
+      }
+
+      .dish-photo-preview {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        z-index: 80;
+        width: max-content;
+        max-width: min(64rem, calc(100vw - 3rem));
+        max-height: calc(100svh - 6rem);
+        overflow: hidden;
+        background: transparent;
+        box-shadow:
+          0 32px 90px rgba(0, 0, 0, 0.72),
+          0 0 0 9999px rgba(0, 0, 0, 0.42);
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, -46%) scale(0.96);
+        transition:
+          opacity 180ms ease,
+          transform 180ms ease,
+          visibility 180ms ease;
+        visibility: hidden;
+      }
+
+      .dish-photo-preview::before {
+        display: none;
+      }
+
+      .dish-photo-preview img {
+        display: block;
+        height: auto;
+        width: auto;
+        max-width: min(62rem, calc(100vw - 4.1rem));
+        max-height: calc(100svh - 6rem);
+        object-fit: contain;
+      }
+
+      .dish-photo:hover .dish-photo-preview,
+      .dish-photo:focus-within .dish-photo-preview,
+      .dish-photo.is-open .dish-photo-preview {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        visibility: visible;
+      }
+
+      @media (max-width: 640px) {
+        .dish-photo-preview {
+          left: 1.25rem;
+          right: 1.25rem;
+          top: 50%;
+          max-height: calc(100svh - 5rem);
+          max-width: calc(100vw - 2.5rem);
+          transform: translateY(-46%) scale(0.96);
+        }
+
+        .dish-photo-preview img {
+          max-width: calc(100vw - 2.5rem);
+          max-height: calc(100svh - 5rem);
+        }
+
+        .dish-photo:hover .dish-photo-preview,
+        .dish-photo:focus-within .dish-photo-preview,
+        .dish-photo.is-open .dish-photo-preview {
+          transform: translateY(-50%) scale(1);
+        }
+      }
+
+      @keyframes menuFade {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes bookingFloatIn {
+        from {
+          opacity: 0;
+          transform: translateY(18px) scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .booking-float,
+        .tab-panel {
+          animation: none;
+        }
+      }
+
+      /* Złote tło strony rgb(231, 188, 116) i ciemny tekst */
+      body {
+        background: #e7bc74;
+        color: #121212;
+      }
+
+      html * {
+        border-color: rgba(18, 18, 18, 0.35);
+      }
+
+      main .text-\[\#A0A0A0\] {
+        color: #2e261b;
+      }
+
+      main [class*="border-[#B8975E]"] {
+        border-color: rgba(18, 18, 18, 0.3);
+      }
+
+      main .border-gray-600 {
+        border-color: rgba(18, 18, 18, 0.45);
+      }
+
+      main strong {
+        font-weight: 700;
+        color: #121212;
+      }
+
+      .nav-scrolled {
+        background: rgba(231, 188, 116, 0.94);
+        border-bottom-color: rgba(18, 18, 18, 0.25);
+      }
+
+
+      .bg-copper {
+        background-color: #121212;
+      }
+
+      .dish-photo-button {
+        border-color: rgba(18, 18, 18, 0.5);
+        background: rgba(18, 18, 18, 0.08);
+        color: #121212;
+      }
+
+      .dish-photo-button:hover,
+      .dish-photo-button:focus-visible {
+        border-color: #121212;
+        background: rgba(18, 18, 18, 0.16);
+        color: #121212;
+        outline-color: rgba(18, 18, 18, 0.6);
+      }
+
+      .lang-btn {
+        padding: 0.35rem 0.5rem;
+        border-bottom: 2px solid transparent;
+        color: #2e261b;
+        letter-spacing: inherit;
+      }
+
+      .lang-btn[aria-pressed="true"] {
+        border-bottom-color: #121212;
+        color: #121212;
+      }
+
+      /* Przerywnik sekcji: stara klisza filmowa z perforacją */
+      .film-divider {
+        height: 80px;
+        background: url("./assets/img/klisza.svg") left center / auto 100% repeat-x;
+        filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+        position: relative;
+        overflow: hidden;
+        /* 1 jednostka = 1 px grafiki klisza.svg (80 px wysokości) */
+        --u: 1px;
+      }
+
+      /* Zdjęcia w klatkach kliszy: klatka 110×36 co 120, od x=5, y=22 */
+      .film-frame {
+        position: absolute;
+        top: calc(22 * var(--u));
+        width: calc(110 * var(--u));
+        height: calc(36 * var(--u));
+        border-radius: calc(2.5 * var(--u));
+        background: center / cover no-repeat;
+        filter: sepia(0.25) saturate(0.85) contrast(1.05) brightness(0.9);
+        overflow: hidden;
+      }
+
+      .film-frame::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.5) 100%);
+      }
+
+      @media (max-width: 767px) {
+        .film-divider {
+          height: 60px;
+          --u: 0.75px;
+        }
+      }
+
+      .cerna-hora-znak {
+        filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.3));
+      }
+
+      /* Hero: zdjęcie lofty Scheiblera, przyciemnione, jasny tekst */
+      .hero-photo {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(16, 12, 9, 0.66) 0%, rgba(16, 12, 9, 0.5) 45%, rgba(16, 12, 9, 0.8) 100%),
+          url("./assets/img/lofty.jpg") center 35% / cover;
+      }
+
+      #hero > .relative.z-10 {
+        color: #f6efe3;
+      }
+
+      #hero h2 {
+        color: #ebd3a3;
+      }
+
+      #hero a[href="#menu-glowne"] {
+        background: #f2e4cd;
+        color: #121212;
+      }
+
+      #hero a[href^="https://zjedz"] {
+        border-color: rgba(246, 239, 227, 0.75);
+        color: #f6efe3;
+      }
+
+      #hero a[href^="https://zjedz"]:hover {
+        background: #f6efe3;
+        color: #121212;
+      }
+
+      /* Navbar nad zdjęciem (na górze strony): jasny tekst i białe logo */
+      @media (min-width: 1024px) {
+        #navbar:not(.nav-scrolled) nav {
+          color: #f6efe3;
+        }
+
+        #navbar:not(.nav-scrolled) .nav-logo {
+          filter: invert(1);
+        }
+
+        #navbar:not(.nav-scrolled) .lang-btn {
+          color: rgba(246, 239, 227, 0.7);
+        }
+
+        #navbar:not(.nav-scrolled) .lang-btn[aria-pressed="true"] {
+          border-bottom-color: #f6efe3;
+          color: #f6efe3;
+        }
+
+        #navbar:not(.nav-scrolled) nav a[href^="https://zjedz"] {
+          border-color: rgba(246, 239, 227, 0.75);
+          color: #f6efe3;
+        }
+      }
+
+      /* Telefon i tablet: to samo, ale nie przy otwartym menu (złote tło) */
+      @media (max-width: 1023px) {
+        #navbar:not(.nav-scrolled):not(:has(#mobileMenu:not(.hidden))) nav {
+          color: #f6efe3;
+        }
+
+        #navbar:not(.nav-scrolled):not(:has(#mobileMenu:not(.hidden))) .nav-logo {
+          filter: invert(1);
+        }
+
+        #navbar:not(.nav-scrolled):not(:has(#mobileMenu:not(.hidden))) .lang-btn {
+          color: rgba(246, 239, 227, 0.7);
+        }
+
+        #navbar:not(.nav-scrolled):not(:has(#mobileMenu:not(.hidden))) .lang-btn[aria-pressed="true"] {
+          border-bottom-color: #f6efe3;
+          color: #f6efe3;
+        }
+
+        #navbar:not(.nav-scrolled):not(:has(#mobileMenu:not(.hidden))) nav a,
+        #navbar:not(.nav-scrolled):not(:has(#mobileMenu:not(.hidden))) #menuButton {
+          border-color: rgba(246, 239, 227, 0.75);
+          color: #f6efe3;
+        }
+      }
+
+      /* Navbar: większe logo, po przewinięciu mniejsze */
+      @media (min-width: 1024px) {
+        .nav-logo {
+          transition: height 400ms ease;
+        }
+
+        .nav-scrolled .nav-logo {
+          height: 4.5rem;
+        }
+      }
+
+      #navbar nav a,
+      .nav-links {
+        white-space: nowrap;
+      }
+
+      @media (min-width: 1024px) and (max-width: 1279px) {
+        .nav-links {
+          gap: 1.1rem !important;
+          font-size: 0.78rem !important;
+          letter-spacing: 0.12em !important;
+        }
+
+        .nav-links + div {
+          gap: 0.75rem !important;
+        }
+
+        .nav-links + div > a {
+          padding-left: 0.9rem !important;
+          padding-right: 0.9rem !important;
+          letter-spacing: 0.14em !important;
+        }
+      }
+
+      /* Telefon i tablet: nawigacja mobilna */
+      .m-only,
+      .nav-book,
+      .safe-top {
+        display: none;
+      }
+
+      @media (max-width: 1023px) {
+        html {
+          scroll-padding-top: calc(80px + env(safe-area-inset-top));
+        }
+
+        .booking-float {
+          display: none !important;
+        }
+
+        .nav-book {
+          display: inline-flex;
+        }
+
+        #mobileMenu {
+          background: rgba(231, 188, 116, 0.98);
+        }
+
+        /* Pasek pod paskiem statusu telefonu: nad navbarem nie prześwituje treść */
+        .safe-top {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 55;
+          display: block;
+          height: env(safe-area-inset-top);
+          background: #e7bc74;
+        }
+
+        #navbar {
+          top: env(safe-area-inset-top);
+          transition:
+            transform 350ms ease,
+            background-color 500ms ease,
+            box-shadow 500ms ease,
+            border-color 500ms ease;
+        }
+
+        #navbar.nav-hidden {
+          transform: translateY(calc(-100% - env(safe-area-inset-top)));
+        }
+
+      }
+
+      /* Telefon: układ treści */
+      @media (max-width: 767px) {
+        .m-only {
+          display: block;
+        }
+
+        main > section {
+          padding-top: 3.5rem !important;
+          padding-bottom: 3.5rem !important;
+        }
+
+        #navbar nav {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        #hero {
+          min-height: auto;
+          padding-top: 7.5rem !important;
+          padding-bottom: 4rem !important;
+        }
+
+        #hero h1 {
+          font-size: 2.1rem;
+          line-height: 1.1;
+        }
+
+        #hero h2 {
+          margin-top: 1.25rem;
+        }
+
+        #hero p.font-light {
+          margin-top: 1rem;
+          font-size: 0.95rem;
+          line-height: 1.7;
+        }
+
+        #hero .mt-10 {
+          margin-top: 2rem;
+        }
+
+        #o-nas .mt-12 {
+          margin-top: 2rem;
+        }
+
+        .m-collapsible:not(.is-expanded) .m-extra {
+          display: none;
+        }
+
+        .m-collapsible .space-y-6 > .m-lead-last ~ p {
+          margin-top: 1.5rem;
+        }
+
+        .m-more-button {
+          margin-top: 1.25rem;
+          border: 1px solid rgba(245, 245, 245, 0.35);
+          padding: 0.8rem 1.4rem;
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+        }
+
+        .m-swipe {
+          display: flex !important;
+          gap: 0.75rem;
+          margin-left: -1.25rem;
+          margin-right: -1.25rem;
+          padding: 0 1.25rem;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+        }
+
+        .m-swipe::-webkit-scrollbar {
+          display: none;
+        }
+
+        .m-swipe > figure {
+          flex: 0 0 64%;
+          margin: 0;
+          scroll-snap-align: start;
+        }
+
+        .m-photo-wide {
+          aspect-ratio: 4 / 3 !important;
+          max-width: none !important;
+        }
+
+        #menu-glowne [role="tablist"],
+        #napoje [role="tablist"] {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0;
+          overflow: visible;
+        }
+
+        #menu-glowne .menu-tab,
+        #napoje .menu-tab {
+          padding: 0.85rem 0.25rem;
+          font-size: 0.7rem;
+          letter-spacing: 0.12em;
+        }
+
+        #menu-glowne p.mt-14 {
+          margin-top: 2.5rem;
+        }
+
+        #piwo h2 {
+          font-size: 2rem;
+          line-height: 1.15;
+        }
+
+        #piwo .m-beers {
+          grid-template-columns: 1fr 1fr;
+          gap: 0.6rem;
+        }
+
+        #piwo .m-beers > article {
+          padding: 1rem 0.85rem;
+        }
+
+        #piwo .m-beers h3 {
+          font-size: 1.3rem;
+        }
+
+        #piwo .m-beers dl {
+          column-gap: 0.75rem;
+        }
+
+        #napoje h2,
+        #rezerwacje h2,
+        #voucher h2 {
+          font-size: 2rem;
+        }
+
+        #kontakt {
+          padding-top: 1.5rem !important;
+        }
+
+        #kontakt a[href^="tel:"],
+        #kontakt a[href^="mailto:"] {
+          padding: 0.3rem 0;
+        }
+      }
