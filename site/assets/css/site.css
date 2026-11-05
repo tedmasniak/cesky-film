@@ -328,12 +328,12 @@ html {
         letter-spacing: 0.28em;
       }
 
-      .seasonal-panel > .seasonal-section[data-subcategory="Bezalkoholowe"] {
+      .seasonal-panel > .seasonal-section-alcohol-free {
         border-bottom-color: rgba(126, 177, 171, 0.7);
         color: #9accc5;
       }
 
-      .seasonal-panel > .seasonal-section[data-subcategory="Alkoholowe"] {
+      .seasonal-panel > .seasonal-section-alcoholic {
         border-bottom-color: rgba(190, 117, 85, 0.75);
         color: #d99a7c;
       }

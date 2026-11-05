@@ -44,8 +44,9 @@ function renderCards(lang) {
 
         function dishHtml(dish) {
           if (dish.naglowek) {
+            const sectionClass = { "Na ciepło": "hot", Bezalkoholowe: "alcohol-free", Alkoholowe: "alcoholic" }[dish.naglowek] || "";
             return `
-              <h3 class="seasonal-section border-b border-[#333333] pb-2 pt-4 text-xs font-bold uppercase tracking-[0.24em] text-[#A0A0A0] md:col-span-2" data-subcategory="${escapeHtml(pick(dish, "naglowek"))}">${escapeHtml(pick(dish, "naglowek"))}</h3>`;
+              <h3 class="seasonal-section seasonal-section-${sectionClass} border-b border-[#333333] pb-2 pt-4 text-xs font-bold uppercase tracking-[0.24em] text-[#A0A0A0] md:col-span-2">${escapeHtml(pick(dish, "naglowek"))}</h3>`;
           }
           const hasIcons = dish.wege || dish.ostre;
           const name = escapeHtml(nameOf(dish));
