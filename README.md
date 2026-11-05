@@ -14,7 +14,8 @@ Statyczna strona restauracji i pubu „Český Film” w Łodzi, przy ul. Ks. Bi
 
 ```text
 site/
-├── index.html                 # struktura strony, treść sekcji i SEO
+├── index.html                 # polska strona, treść sekcji i SEO
+├── en/index.html              # angielska wersja pod /en/
 ├── robots.txt
 ├── sitemap.xml
 ├── favicon.jpg
@@ -61,7 +62,7 @@ Następnie otwórz `http://127.0.0.1:8000/`. Strona używa lokalnych plików Jav
 
 ## SEO i adresy
 
-`index.html` zawiera canonical, podstawowe Open Graph/Twitter Cards oraz JSON-LD typu `Restaurant`. `robots.txt` wskazuje `sitemap.xml`. Aktualny przełącznik PL/EN działa na tej samej stronie; nie dodawaj `hreflang`, dopóki wersje językowe nie otrzymają osobnych, stabilnych adresów.
+`index.html` i `en/index.html` zawierają własne canonical, podstawowe Open Graph/Twitter Cards, JSON-LD typu `Restaurant` oraz wzajemne `hreflang`. Polska wersja jest pod `/`, angielska pod `/en/`; przełącznik języka prowadzi między tymi adresami. `robots.txt` wskazuje `sitemap.xml`, która zawiera oba adresy.
 
 Przed publikacją należy potwierdzić z właścicielem aktualne godziny otwarcia i dane kontaktowe. Godziny w JSON-LD muszą być zgodne z widoczną treścią strony i wizytówką Google.
 

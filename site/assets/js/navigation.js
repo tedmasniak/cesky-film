@@ -123,7 +123,9 @@ const navbar = document.getElementById("navbar");
         if (tab) activateTab(tab);
 
         const langButton = event.target.closest(".lang-btn");
-        if (langButton) setLang(langButton.dataset.lang);
+        if (langButton) {
+          switchLanguage(langButton.dataset.lang);
+        }
 
         const photoButton = event.target.closest(".dish-photo-button");
         if (photoButton) {

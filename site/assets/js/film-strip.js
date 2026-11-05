@@ -1,6 +1,6 @@
 // Zdjęcia w kliszach między sekcjami; każda klisza ma inną kolejność
       (() => {
-        const KLATKI_ZDJECIA = [1, 2, 3, 4, 5, 6, 7].map((n) => `./assets/img/klisza-0${n}.jpg`);
+        const KLATKI_ZDJECIA = [1, 2, 3, 4, 5, 6, 7].map((n) => `${window.SITE_ASSET_ROOT || "./assets"}/img/klisza-0${n}.jpg`);
         const KOLEJNOSCI = [
           [0, 1, 2, 3, 4, 5, 6],
           [3, 6, 1, 5, 0, 2, 4],

@@ -1,3 +1,9 @@
+const SITE_ROOT = window.SITE_ROOT || ".";
+
+function assetUrl(path) {
+  return `${SITE_ROOT}/${path.replace(/^\.\//, "")}`;
+}
+
 function renderCards(lang) {
         const en = lang === "en";
         const t = UI_TEXT[lang];
@@ -25,7 +31,7 @@ function renderCards(lang) {
                         </svg>
                       </button>
                       <span class="dish-photo-preview" aria-hidden="true">
-                        <img src="${escapeHtml(dish.zdjecie)}" alt="${name}" loading="lazy" decoding="async" />
+                        <img src="${escapeHtml(assetUrl(dish.zdjecie))}" alt="${name}" loading="lazy" decoding="async" />
                       </span>
                     </span>`;
         }
@@ -144,8 +150,20 @@ function renderCards(lang) {
       }
 
       const urlLang = new URLSearchParams(location.search).get("lang");
-      let savedLang = null;
-      try {
-        savedLang = localStorage.getItem("ceskyFilmLang");
-      } catch (error) {}
-      setLang(urlLang === "en" || urlLang === "pl" ? urlLang : savedLang === "en" ? "en" : "pl");
+      const routeLang = /\/en\/?$/.test(location.pathname) ? "en" : "pl";
+
+      function languageUrl(lang) {
+        const path = location.pathname.replace(/\/+$/, "");
+        if (lang === "en") return `${path.endsWith("/en") ? path : `${path}/en`}/`;
+        return `${path.replace(/\/en$/, "") || ""}/`;
+      }
+
+      function switchLanguage(lang) {
+        if (lang !== routeLang) {
+          window.location.href = languageUrl(lang);
+          return true;
+        }
+        return false;
+      }
+
+      setLang(urlLang === routeLang ? urlLang : routeLang);
