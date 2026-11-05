@@ -45,7 +45,7 @@ function renderCards(lang) {
         function dishHtml(dish) {
           if (dish.naglowek) {
             return `
-              <h3 class="border-b border-[#333333] pb-2 pt-4 text-xs font-bold uppercase tracking-[0.24em] text-[#A0A0A0] md:col-span-2">${escapeHtml(pick(dish, "naglowek"))}</h3>`;
+              <h3 class="seasonal-section border-b border-[#333333] pb-2 pt-4 text-xs font-bold uppercase tracking-[0.24em] text-[#A0A0A0] md:col-span-2" data-subcategory="${escapeHtml(pick(dish, "naglowek"))}">${escapeHtml(pick(dish, "naglowek"))}</h3>`;
           }
           const hasIcons = dish.wege || dish.ostre;
           const name = escapeHtml(nameOf(dish));
@@ -92,7 +92,7 @@ function renderCards(lang) {
             .map((category) => {
               const note = pick(category, "uwagi");
               return `
-            <div id="${card.prefix}${category.id}" class="tab-panel ${category.id === card.active ? "grid" : "hidden"} grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2" data-panel="${category.id}" role="tabpanel">
+            <div id="${card.prefix}${category.id}" class="tab-panel ${category.id === card.active ? "grid" : "hidden"} ${category.id === "sezonowe" ? "seasonal-panel" : ""} grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2" data-panel="${category.id}" role="tabpanel">
               ${note ? `<p class="text-sm text-[#A0A0A0] md:col-span-2">${escapeHtml(note)}</p>` : ""}
               ${category.dania.map(dishHtml).join("")}
             </div>`;
