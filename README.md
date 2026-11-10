@@ -4,7 +4,12 @@ Statyczna strona restauracji i pubu „Český Film” w Łodzi, przy ul. Ks. Bi
 
 ## Zasady projektu
 
-- `site/` jest jedynym źródłem publikowanej strony.
+- Repozytorium: https://github.com/tedmasniak/cesky-film (prywatne).
+- `site/` jest aktualną ręcznie przygotowaną stroną; jej wygląd nie został zmieniony podczas migracji repo.
+- `content/cesky-film.json` i `images/` są źródłem treści i zdjęć zapisywanych przez CMS.
+- Obecnie zapis CMS NIE regeneruje `site/`. Podłączenie generatora HTML (Astro) i publikacji na przycisk to następny etap.
+- Panel i backend są oddzielnie: https://github.com/tedmasniak/client-cms.
+- Repo połączono z dawnym `cesky-film-content` bez usuwania historii commitów bota i historii strony.
 - Nie ma procesu buildowania ani frameworka aplikacyjnego.
 - Nie edytuj kopii w `workspace/hosting/ted-hosting/public/`; jest generowana podczas publikacji.
 - Przed publikacją sprawdź stronę lokalnie na desktopie i telefonie.
