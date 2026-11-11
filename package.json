@@ -1,0 +1,11 @@
+{
+  "name": "cesky-film",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "preview": "node scripts/build.mjs && python3 -m http.server -d dist 8000"
+  }
+}

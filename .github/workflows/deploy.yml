@@ -1,0 +1,100 @@
+# Build the website from content/ + site/ and deploy it to MyDevil over SSH.
+# Configuration (Settings → Environments → mydevil): see docs/hosting-mydevil.md.
+# Without configuration the job only builds and tests the site.
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only show what would change on the server"
+        type: boolean
+        default: false
+
+concurrency:
+  group: deploy-mydevil
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: mydevil
+    timeout-minutes: 15
+    env:
+      DEPLOY_HOST: ${{ vars.MYDEVIL_HOST }}
+      DEPLOY_LOGIN: ${{ vars.MYDEVIL_LOGIN }}
+      DEPLOY_DOMAIN: ${{ vars.MYDEVIL_DOMAIN }}
+      DEPLOY_PORT: ${{ vars.MYDEVIL_PORT || '22' }}
+      DEPLOY_PATH: ${{ vars.MYDEVIL_PATH }}
+      DEPLOY_METHOD: ${{ vars.MYDEVIL_METHOD || 'rsync' }}
+      DEPLOY_PURGE_CACHE: ${{ vars.MYDEVIL_PURGE_CACHE || '1' }}
+      DEPLOY_DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
+      SITE_URL: ${{ vars.SITE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: node scripts/build.mjs
+
+      - name: Check configuration
+        id: config
+        env:
+          KEY: ${{ secrets.MYDEVIL_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.MYDEVIL_KNOWN_HOSTS }}
+        run: |
+          missing=""
+          for name in DEPLOY_HOST DEPLOY_LOGIN DEPLOY_DOMAIN; do
+            [ -n "${!name}" ] || missing="$missing $name"
+          done
+          [ -n "$KEY" ] || missing="$missing MYDEVIL_SSH_KEY"
+          [ -n "$KNOWN_HOSTS" ] || missing="$missing MYDEVIL_KNOWN_HOSTS"
+          if [ -n "$missing" ]; then
+            echo "::notice::Deploy skipped, not configured:$missing (see docs/hosting-mydevil.md)"
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Prepare SSH
+        if: steps.config.outputs.enabled == 'true'
+        env:
+          KEY: ${{ secrets.MYDEVIL_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.MYDEVIL_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 "$RUNNER_TEMP/ssh"
+          printf '%s\n' "$KEY" > "$RUNNER_TEMP/ssh/key"
+          printf '%s\n' "$KNOWN_HOSTS" > "$RUNNER_TEMP/ssh/known_hosts"
+          chmod 600 "$RUNNER_TEMP/ssh/key" "$RUNNER_TEMP/ssh/known_hosts"
+          command -v rsync >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq rsync)
+          if [ "$DEPLOY_METHOD" = sftp ]; then command -v lftp >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq lftp); fi
+
+      - name: Deploy
+        if: steps.config.outputs.enabled == 'true'
+        env:
+          DEPLOY_KEY_FILE: ${{ runner.temp }}/ssh/key
+          DEPLOY_KNOWN_HOSTS: ${{ runner.temp }}/ssh/known_hosts
+        run: bash scripts/deploy.sh
+
+      - name: Check website
+        if: steps.config.outputs.enabled == 'true' && env.SITE_URL != '' && env.DEPLOY_DRY_RUN != '1'
+        run: |
+          sleep 3
+          deployed=$(curl -fsS --retry 3 "${SITE_URL%/}/build.json?nocache=$GITHUB_SHA" | grep -o '"commit": *"[^"]*"' | cut -d'"' -f4)
+          echo "Website reports commit: $deployed"
+          [ "$deployed" = "$GITHUB_SHA" ] || { echo "::error::Website does not serve this commit yet (cache?)"; exit 1; }
+
+      - name: Clean up key
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/ssh"
