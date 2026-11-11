@@ -56,7 +56,7 @@ test("generated menu-data.js runs and contains the CMS content", () => {
 
 test("full build produces a complete static site", () => {
   const out = mkdtempSync(path.join(tmpdir(), "site-"));
-  execFileSync(process.execPath, [path.join(root, "scripts/build.mjs"), "--out", out], { env: { ...process.env, BUILD_COMMIT: "abc" } });
+  execFileSync(process.execPath, [path.join(root, "scripts/build.mjs"), "--out", out], { env: { ...process.env, GITHUB_SHA: "", BUILD_COMMIT: "abc" } });
   for (const file of ["index.html", "en/index.html", "robots.txt", "sitemap.xml", "assets/js/menu-data.js", "assets/css/site.css", "build.json"])
     assert.ok(existsSync(path.join(out, file)), file);
   assert.equal(JSON.parse(readFileSync(path.join(out, "build.json"), "utf8")).commit, "abc");

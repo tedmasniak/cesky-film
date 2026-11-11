@@ -124,7 +124,7 @@ async function main() {
     path.join(outDir, "build.json"),
     JSON.stringify(
       {
-        commit: process.env.GITHUB_SHA || process.env.BUILD_COMMIT || "local",
+        commit: process.env.BUILD_COMMIT || process.env.GITHUB_SHA || "local",
         builtAt: new Date().toISOString(),
       },
       null,
