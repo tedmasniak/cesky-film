@@ -26,11 +26,12 @@ jobs:
     environment: mydevil
     timeout-minutes: 15
     env:
-      DEPLOY_HOST: ${{ vars.MYDEVIL_HOST }}
-      DEPLOY_LOGIN: ${{ vars.MYDEVIL_LOGIN }}
+      # Host, login and path are secrets so the (public) run logs mask them.
+      DEPLOY_HOST: ${{ secrets.MYDEVIL_HOST }}
+      DEPLOY_LOGIN: ${{ secrets.MYDEVIL_LOGIN }}
       DEPLOY_DOMAIN: ${{ vars.MYDEVIL_DOMAIN }}
       DEPLOY_PORT: ${{ vars.MYDEVIL_PORT || '22' }}
-      DEPLOY_PATH: ${{ vars.MYDEVIL_PATH }}
+      DEPLOY_PATH: ${{ secrets.MYDEVIL_PATH }}
       DEPLOY_METHOD: ${{ vars.MYDEVIL_METHOD || 'rsync' }}
       DEPLOY_PURGE_CACHE: ${{ vars.MYDEVIL_PURGE_CACHE || '1' }}
       DEPLOY_DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}

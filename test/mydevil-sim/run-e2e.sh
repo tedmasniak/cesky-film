@@ -48,7 +48,7 @@ run_deploy() {
     act push -W .github/workflows/deploy.yml -j deploy --pull=false \
       --network "$NET" \
       -P ubuntu-latest=catthehacker/ubuntu:act-22.04 \
-      --var MYDEVIL_HOST="$host" --var MYDEVIL_PORT=22 --var MYDEVIL_LOGIN=$LOGIN \
+      --secret MYDEVIL_HOST="$host" --var MYDEVIL_PORT=22 --secret MYDEVIL_LOGIN=$LOGIN \
       --var MYDEVIL_DOMAIN=$DOMAIN --var SITE_URL="http://$host" \
       --secret MYDEVIL_SSH_KEY="$(cat "$WORK/key")" \
       --secret MYDEVIL_KNOWN_HOSTS="$(cat "$WORK/known_hosts_act")" \

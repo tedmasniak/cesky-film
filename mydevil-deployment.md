@@ -31,17 +31,17 @@ Na koncie:
 3. Wygenerować klucz tylko do deployu: `ssh-keygen -t ed25519 -N '' -f mydevil-deploy`, publiczny dopisać do `~/.ssh/authorized_keys`.
 4. Pobrać klucz hosta: `ssh-keyscan -t ed25519 sXX.mydevil.net` i porównać fingerprint z https://pomoc.mydevil.net/Fingerprint/ .
 
-W GitHubie: Settings → Environments → `mydevil`.
+W GitHubie: Settings → Environments → `mydevil`. Repo jest publiczne, więc logi Actions też: host, login i ścieżka są sekretami, żeby GitHub je maskował.
 
 | Nazwa | Typ | Wartość |
 |---|---|---|
-| `MYDEVIL_HOST` | variable | serwer SSH konta, np. `s67.mydevil.net` |
-| `MYDEVIL_LOGIN` | variable | login konta |
+| `MYDEVIL_HOST` | secret | serwer SSH konta, np. `s67.mydevil.net` |
+| `MYDEVIL_LOGIN` | secret | login konta |
 | `MYDEVIL_DOMAIN` | variable | `ceskyfilm.pl` |
 | `SITE_URL` | variable | `https://ceskyfilm.pl` |
 | `MYDEVIL_SSH_KEY` | secret | prywatny klucz z pkt 3 |
 | `MYDEVIL_KNOWN_HOSTS` | secret | linia z pkt 4 |
-| `MYDEVIL_PATH` | variable, opcjonalnie | inny katalog niż `public_html` |
+| `MYDEVIL_PATH` | secret, opcjonalnie | inny katalog niż `public_html` |
 | `MYDEVIL_METHOD` | variable, opcjonalnie | `sftp`, jeśli na koncie nie ma rsync |
 | `MYDEVIL_PURGE_CACHE` | variable, opcjonalnie | `0` wyłącza czyszczenie cache |
 

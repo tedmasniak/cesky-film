@@ -50,7 +50,3 @@ Podgląd tylko przez serwer HTTP, nie z `file://`.
 ## SEO i adresy
 
 `index.html` i `en/index.html` mają własne canonical, Open Graph/Twitter Cards, JSON-LD `Restaurant` (telefon, adres i godziny z CMS) oraz wzajemne `hreflang`. Polska wersja pod `/`, angielska pod `/en/`. `robots.txt` wskazuje `sitemap.xml`.
-
-## Podgląd na ted-hosting
-
-Na prośbę można wrzucić stronę na `https://ted-hosting.web.app/cesky-film/` przez `shared/tools/firebase-publish.sh dist cesky-film` (po `npm run build`; publikować `dist/`, nie `site/`). Nie edytować kopii w `workspace/hosting/ted-hosting/public/`.
