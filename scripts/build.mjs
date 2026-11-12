@@ -3,17 +3,20 @@
 //
 //   node scripts/build.mjs [--out dist]
 //
-// 1. copies site/ (hand-made HTML, CSS, JS, fonts, images) unchanged;
+// 1. copies site/ (hand-made HTML, CSS, JS, fonts, images);
 // 2. regenerates the MENU and NAPOJE data in assets/js/menu-data.js from
-//    content/cesky-film.json (the file the CMS edits); the rendering code and the
-//    page design stay exactly as written in site/;
-// 3. copies CMS images (images/) to assets/img/ so new uploads are published.
+//    content/cesky-film.json (the file the CMS edits);
+// 3. writes CMS texts, contact, hours and SEO into index.html and en/index.html
+//    and prerenders the menu cards into the HTML (scripts/pages.mjs);
+// 4. copies CMS images (images/) to assets/img/ so new uploads are published.
+// The page design stays as written in site/.
 //
 // No dependencies; Node.js 20+.
 import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { renderPage } from "./pages.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const args = process.argv.slice(2);
@@ -113,7 +116,13 @@ async function main() {
     for (const name of await readdir(imagesDir))
       await cp(path.join(imagesDir, name), path.join(outDir, "assets", "img", name));
   const template = await readFile(path.join(root, "site", MENU_FILE), "utf8");
-  await writeFile(path.join(outDir, MENU_FILE), menuDataSource(document, template));
+  const menuDataJs = menuDataSource(document, template);
+  await writeFile(path.join(outDir, MENU_FILE), menuDataJs);
+  const rendererJs = await readFile(path.join(root, "site", "assets", "js", "menu-renderer.js"), "utf8");
+  for (const [page, lang] of [["index.html", "pl"], [path.join("en", "index.html"), "en"]]) {
+    const html = await readFile(path.join(root, "site", page), "utf8");
+    await writeFile(path.join(outDir, page), renderPage(html, document, lang, { menuDataJs, rendererJs }));
+  }
   // Every image the generated menu references must be published.
   for (const scope of ["food", "drinks"])
     for (const category of siteMenu(document, scope))

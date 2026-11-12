@@ -2,81 +2,55 @@
 
 Statyczna strona restauracji i pubu „Český Film” w Łodzi, przy ul. Ks. Biskupa Wincentego Tymienieckiego 25a.
 
-## Zasady projektu
-
 - Repozytorium: https://github.com/tedmasniak/cesky-film (prywatne).
-- `site/` jest aktualną ręcznie przygotowaną stroną; jej wygląd nie został zmieniony podczas migracji repo.
-- `content/cesky-film.json` i `images/` są źródłem treści i zdjęć zapisywanych przez CMS.
-- Obecnie zapis CMS NIE regeneruje `site/`. Podłączenie generatora HTML (Astro) i publikacji na przycisk to następny etap.
-- Panel i backend są oddzielnie: https://github.com/tedmasniak/client-cms.
-- Repo połączono z dawnym `cesky-film-content` bez usuwania historii commitów bota i historii strony.
-- Nie ma procesu buildowania ani frameworka aplikacyjnego.
-- Nie edytuj kopii w `workspace/hosting/ted-hosting/public/`; jest generowana podczas publikacji.
-- Przed publikacją sprawdź stronę lokalnie na desktopie i telefonie.
-- Zmiany wizualne powinny być świadome: refaktor plików nie powinien zmieniać wyglądu.
+- Panel treści i backend: https://github.com/tedmasniak/client-cms.
+- Hosting docelowy: MyDevil. Pipeline i podpięcie konta: [mydevil-deployment.md](mydevil-deployment.md).
 
 ## Struktura
 
 ```text
-site/
-├── index.html                 # polska strona, treść sekcji i SEO
-├── en/index.html              # angielska wersja pod /en/
-├── robots.txt
-├── sitemap.xml
-├── favicon.jpg
-└── assets/
-    ├── css/
-    │   ├── fonts.css          # lokalne deklaracje fontów
-    │   └── site.css           # własne style strony
-    ├── fonts/                 # pliki fontów
-    ├── img/                   # zdjęcia, logo i grafiki
-    └── js/
-        ├── tailwind.js        # lokalny Tailwind Play CDN
-        ├── menu-data.js       # dane karty dań i napojów
-        ├── menu-renderer.js   # renderowanie zakładek i pozycji karty
-        ├── navigation.js      # język, navbar, menu mobilne i zdjęcia dań
-        └── film-strip.js      # klisze ze zdjęciami między sekcjami
+content/cesky-film.json   # treść edytowana w panelu CMS (menu, teksty, kontakt, godziny, SEO)
+images/                   # zdjęcia z panelu
+site/                     # szablon strony: HTML, CSS, JS, fonty, grafiki
+├── index.html            # wersja polska
+├── en/index.html         # wersja angielska pod /en/
+└── assets/js/
+    ├── menu-data.js      # dane karty; w dist/ generowane z content/
+    ├── menu-renderer.js  # renderowanie kart (w buildzie i w przeglądarce)
+    ├── navigation.js     # język, navbar, zakładki, menu mobilne
+    └── film-strip.js     # klisze ze zdjęciami
+scripts/build.mjs         # build: site/ + content/ + images/ → dist/
+scripts/pages.mjs         # wpisywanie treści z CMS do HTML i prerender menu
+scripts/deploy.sh         # wysyłka dist/ na MyDevil
+.github/workflows/deploy.yml
+tests/                    # testy buildu
+test/mydevil-sim/         # atrapa MyDevil (Docker) i test e2e deployu
 ```
 
-## Edycja treści
+## Treść i build
 
-### Menu i napoje
+Treść zmienia się w panelu, nie w `site/`. Panel commituje `content/cesky-film.json` i `images/`; push na `main` buduje i wdraża stronę.
 
-Dane karty znajdują się w `site/assets/js/menu-data.js`. Nie trzeba zmieniać funkcji renderujących. Każda kategoria ma `id`, polskie `kategoria`, opcjonalne `kategoriaEn` oraz tablicę `dania`. Pozycja może zawierać między innymi:
+Build wpisuje do HTML-a wszystkie pola z panelu. Elementy w `site/` powiązane z polem CMS mają atrybut `data-cms="<id pola>"`; kontakt i godziny są podmieniane po wartościach. Karta dań i napojów jest renderowana do HTML-a, więc jest widoczna dla wyszukiwarek bez JS.
 
-- `nazwa` i `en` — nazwa po polsku i angielsku;
-- `skladniki` i `skladnikiEn` — składniki;
-- `cena`;
-- `uwagi` i `uwagiEn`;
-- `wege`, `ostre`;
-- `zdjecie` — względna ścieżka do zdjęcia w `assets/img/`.
+Przy zmianach w `site/`:
 
-### Teksty strony
+- nie usuwać `data-cms` ani kontenerów `#menuTabs`, `#menuPanels`, `#drinkTabs`, `#drinkPanels`;
+- teksty tłumaczone mają `data-en` (oraz `data-en-aria-label`, `data-en-alt`, `data-en-title`);
+- nowe pole edytowalne wymaga zmiany w schemacie panelu (client-cms) i `data-cms` w obu wersjach językowych; test „every CMS text field has a marked element” to pilnuje.
 
-Treść sekcji znajduje się w `site/index.html`. Dla tekstów tłumaczonych należy zachować `data-en`. Atrybuty dostępności i opisy obrazów mają odpowiedniki `data-en-aria-label`, `data-en-alt` i `data-en-title`.
-
-## Podgląd lokalny
-
-W katalogu repozytorium uruchom:
-
-```bash
-python3 -m http.server -d site 8000
+```sh
+npm test          # testy buildu
+npm run build     # dist/
+npm run preview   # build + http://127.0.0.1:8000/
 ```
 
-Następnie otwórz `http://127.0.0.1:8000/`. Strona używa lokalnych plików JavaScript i fontów, więc do poprawnego testu należy korzystać z serwera HTTP, a nie otwierać `index.html` bezpośrednio z dysku.
+Podgląd tylko przez serwer HTTP, nie z `file://`.
 
 ## SEO i adresy
 
-`index.html` i `en/index.html` zawierają własne canonical, podstawowe Open Graph/Twitter Cards, JSON-LD typu `Restaurant` oraz wzajemne `hreflang`. Polska wersja jest pod `/`, angielska pod `/en/`; przełącznik języka prowadzi między tymi adresami. `robots.txt` wskazuje `sitemap.xml`, która zawiera oba adresy.
+`index.html` i `en/index.html` mają własne canonical, Open Graph/Twitter Cards, JSON-LD `Restaurant` (telefon, adres i godziny z CMS) oraz wzajemne `hreflang`. Polska wersja pod `/`, angielska pod `/en/`. `robots.txt` wskazuje `sitemap.xml`.
 
-Przed publikacją należy potwierdzić z właścicielem aktualne godziny otwarcia i dane kontaktowe. Godziny w JSON-LD muszą być zgodne z widoczną treścią strony i wizytówką Google.
+## Podgląd na ted-hosting
 
-## Publikacja
-
-Publikacja jest osobną, świadomą czynnością i nie odbywa się automatycznie. Źródłem prawdy jest repozytorium; hosting kopiuje folder `site/`:
-
-```bash
-"${TED_DIRECTORY}/shared/tools/firebase-publish.sh" site cesky-film
-```
-
-Adres docelowy: `https://ted-hosting.web.app/cesky-film/`.
+Na prośbę można wrzucić stronę na `https://ted-hosting.web.app/cesky-film/` przez `shared/tools/firebase-publish.sh dist cesky-film` (po `npm run build`; publikować `dist/`, nie `site/`). Nie edytować kopii w `workspace/hosting/ted-hosting/public/`.

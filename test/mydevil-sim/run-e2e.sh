@@ -27,6 +27,8 @@ for _ in $(seq 30); do ssh-keyscan -p "$SSH_PORT" -t ed25519 127.0.0.1 > "$WORK/
 ssh_sim() { ssh -p "$SSH_PORT" -i "$WORK/key" -o IdentitiesOnly=yes -o BatchMode=yes -o UserKnownHostsFile="$WORK/known_hosts" "$LOGIN@127.0.0.1" "$@"; }
 pass() { echo "PASS  $*"; }
 fail() { echo "FAIL  $*"; exit 1; }
+# Fetch first, then grep: "curl | grep -q" fails under pipefail once grep stops reading early.
+http_has() { local body; body="$(curl -fsS "http://127.0.0.1:$HTTP_PORT$1")" && grep -q -- "$2" <<<"$body"; }
 
 echo "== negative: wrong host key is refused"
 ssh-keyscan -p "$SSH_PORT" -t ed25519 127.0.0.1 2>/dev/null | sed 's/AAAA[A-Za-z0-9+\/]*/AAAAC3NzaC1lZDI1NTE5AAAAIBadKeyBadKeyBadKeyBadKeyBadKeyBadKey0000/' > "$WORK/bad_known_hosts"
@@ -64,8 +66,8 @@ run_deploy "${1:-}" || fail "deploy run failed"
 DOCROOT="/usr/home/$LOGIN/domains/$DOMAIN/public_html"
 ssh_sim "test -f $DOCROOT/index.html && test -f $DOCROOT/en/index.html && test -f $DOCROOT/assets/js/menu-data.js" && pass "files in $DOCROOT"
 ssh_sim "test -f $DOCROOT/.well-known/acme-challenge/token" && pass ".well-known kept" || fail ".well-known deleted"
-curl -fsS "http://127.0.0.1:$HTTP_PORT/" | grep -q "Český Film" && pass "HTTP serves the site" || fail "HTTP"
-curl -fsS "http://127.0.0.1:$HTTP_PORT/assets/js/menu-data.js" | grep -q "WYGENEROWANE" && pass "generated menu published" || fail "menu"
+http_has / "Český Film" && pass "HTTP serves the site" || fail "HTTP"
+http_has /assets/js/menu-data.js "WYGENEROWANE" && pass "generated menu published" || fail "menu"
 ssh_sim "grep -q 'www options $DOMAIN cache purge' ~/devil.log" && pass "cache purge called" || fail "cache purge not called"
 
 echo "== second deploy after a content change (simulated CMS commit)"
@@ -73,7 +75,8 @@ cp content/cesky-film.json "$WORK/content.bak"
 node -e 'const f="content/cesky-film.json",fs=require("fs");const d=JSON.parse(fs.readFileSync(f));d.menus.food.categories[0].items[0].name="E2E zmiana z panelu";fs.writeFileSync(f,JSON.stringify(d,null,2)+"\n")'
 ssh_sim "echo stale > $DOCROOT/old-file.html"
 run_deploy "${1:-}" || { cp "$WORK/content.bak" content/cesky-film.json; fail "second deploy failed"; }; cp "$WORK/content.bak" content/cesky-film.json
-curl -fsS "http://127.0.0.1:$HTTP_PORT/assets/js/menu-data.js" | grep -q "E2E zmiana z panelu" && pass "content change visible over HTTP" || fail "change not visible"
+http_has /assets/js/menu-data.js "E2E zmiana z panelu" && pass "content change visible over HTTP" || fail "change not visible"
+http_has / '<article>' && http_has / "E2E zmiana z panelu" && pass "change is in the prerendered index.html" || fail "change missing from static HTML"
 ssh_sim "test ! -e $DOCROOT/old-file.html" && pass "removed files deleted" || fail "stale file left"
 ssh_sim "ls /usr/home/$LOGIN/domains/$DOMAIN/deploy-backups | grep -q ." && pass "previous version backed up" || fail "no backup"
 ssh_sim "find /usr/home/$LOGIN/domains/$DOMAIN/deploy-backups -name menu-data.js | grep -q ." && pass "backup contains replaced files"
